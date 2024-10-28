@@ -53,9 +53,10 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
+                <a class="collapse-item p-2" href="tambah-keahlian.php">Tambah Data Keterampilan</a>
+                <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
                 <a class="collapse-item" href="content.php">Konten</a>
                 <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
                 <a class="collapse-item" href="utilities-other.html">Other</a>
             </div>
         </div>

@@ -329,7 +329,7 @@ if (isset($_POST['edit'])) {
 
                         <div class="col-md-6">
                             <div class="card" style="width: 38rem;">
-                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> Instruktur</div>
+                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> Profile</div>
                                 <div class="card-body">
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
