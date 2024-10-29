@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 10:54 AM
+-- Generation Time: Oct 29, 2024 at 04:54 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,16 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `about` (
   `id` int(11) NOT NULL,
-  `deskripsi` int(11) NOT NULL,
-  `profesi` int(11) NOT NULL,
-  `deskripsi_profesi` int(11) NOT NULL,
-  `website` int(11) NOT NULL,
-  `kota` int(11) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
+  `profesi` varchar(255) NOT NULL,
+  `deskripsi_profesi` varchar(100) NOT NULL,
+  `website` varchar(100) NOT NULL,
+  `kota` text NOT NULL,
   `umur` int(11) NOT NULL,
-  `email` int(11) NOT NULL,
+  `email` varchar(1000) NOT NULL,
+  `foto` varchar(255) NOT NULL,
   `date` int(11) NOT NULL,
   `craete_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `about`
+--
+
+INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `website`, `kota`, `umur`, `email`, `foto`, `date`, `craete_at`) VALUES
+(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', '1730217041_profile-img.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -119,9 +127,7 @@ CREATE TABLE `home` (
 --
 
 INSERT INTO `home` (`id`, `header`, `sub_judul`, `foto`, `created_at`) VALUES
-(1, 'lorem ipsum dolor site amet', 'lorem dolor', 'profile-img.jpg', '2024-10-29 09:17:23'),
-(3, 'lorem ipsum dolor site amet', 'lorem dolor', 'services.jpg', '2024-10-29 09:18:38'),
-(4, 'lorem ipsum dolor site amet', 'lorem dolor', 'services.jpg', '2024-10-29 09:20:20');
+(1, 'lorem ipsum dolor site amet', 'lorem dolor', 'img-1.jpg', '2024-10-29 12:44:05');
 
 -- --------------------------------------------------------
 
@@ -182,12 +188,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `foto`, `update_at`, `create_at`) VALUES
-(1, 'rio tunsteng', 'bandung', '1210822.png', '2024-10-26 16:38:31', '2024-10-26 14:35:11'),
-(5, 'sparkel', 'penacony', 'picture4.jpg', '2024-10-28 06:28:44', '2024-10-28 06:28:44');
+(1, 'rio tunsteng', 'bandung', 'img-1.jpg', '2024-10-29 13:02:12', '2024-10-26 14:35:11');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `about`
+--
+ALTER TABLE `about`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admin`
@@ -230,6 +241,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `about`
+--
+ALTER TABLE `about`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
@@ -257,7 +274,7 @@ ALTER TABLE `konten`
 -- AUTO_INCREMENT for table `testimoni`
 --
 ALTER TABLE `testimoni`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

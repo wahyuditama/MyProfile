@@ -1,17 +1,15 @@
 <?php
 session_start();
 include 'database/db.php';
-// munculkan / pilih sebuah atau semua kolom dari table user
-$query = mysqli_query($conn, "SELECT * FROM user");
-// mysqli_fetch_assoc($query) = untuk menjadikan hasil query menjadi sebuah data (object,array)
 
-// jika parameternya ada ?delete=nilai param
+$queryTest = mysqli_query($conn, "SELECT * FROM testimoni");
+
+
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete']; //mengambil nilai params
+    $id = $_GET['delete'];
 
-    // query / perintah hapus
-    $delete = mysqli_query($conn, "DELETE FROM user  WHERE id ='$id'");
-    header("location:profile.php?hapus=berhasil");
+    $deleteTest = mysqli_query($conn, "DELETE FROM testimoni  WHERE id ='$id'");
+    header("location:testimoni.php?hapus=berhasil");
 }
 ?>
 
@@ -276,7 +274,7 @@ if (isset($_GET['delete'])) {
                                 </div>
                             <?php endif ?>
                             <div align="right" class="mb-3">
-                                <a href="tambah-profile.php" class="btn btn-primary">Tambah</a>
+                                <a href="tambah-testimoni.php" class="btn btn-primary">Tambah</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" width="100%">
@@ -284,27 +282,29 @@ if (isset($_GET['delete'])) {
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>alamat</th>
+                                            <th>Deskripsi</th>
+                                            <th>Profesi</th>
                                             <th>Foto</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;
-                                        while ($row = mysqli_fetch_assoc($query)) { ?>
+                                        while ($rowTest = mysqli_fetch_assoc($queryTest)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $rowTest['nama'] ?></td>
+                                                <td><?php echo $rowTest['deskripsi'] ?></td>
+                                                <td><?php echo $rowTest['profesi'] ?></td>
                                                 <td>
-                                                    <img width="100" src="upload/<?php echo $row['foto'] ?>" alt="">
+                                                    <img width="100" src="upload/<?php echo $rowTest['foto'] ?>" alt="">
                                                 </td>
-                                                <td><?php echo $row['nama'] ?></td>
-                                                <td><?php echo $row['alamat'] ?></td>
                                                 <td>
-                                                    <a href="tambah-profile.php?edit=<?php echo $row['id'] ?>" class="btn btn-success btn-sm">
+                                                    <a href="tambah-testimoni.php?edit=<?php echo $rowTest['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>
                                                     </a>
                                                     <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')"
-                                                        href="profile.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">
+                                                        href="testimoni.php?delete=<?php echo $rowTest['id'] ?>" class="btn btn-danger btn-sm">
                                                         <span class="tf-icon bx bx-trash bx-18px ">Delete</span>
                                                     </a>
                                                 </td>

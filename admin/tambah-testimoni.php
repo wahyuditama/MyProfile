@@ -22,19 +22,19 @@ if (isset($_POST['simpan'])) {
 
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
-            $insert = mysqli_query($conn, "INSERT INTO testimoni (nama, deskripsi,  foto)
-            VALUES ('$nama','$deskripsi','$nama_foto')");
+            $insert = mysqli_query($conn, "INSERT INTO testimoni (nama, deskripsi, profesi,  foto)
+            VALUES ('$nama','$deskripsi','$profesi','$nama_foto')");
         }
     } else {
-        $insert = mysqli_query($conn, "INSERT INTO testimoni (nama, alamat)
-            VALUES ('$nama','$alamat')");
+        $insert = mysqli_query($conn, "INSERT INTO testimoni (nama, deskripsi,profesi)
+            VALUES ('$nama','$deskripsi','$profesi')");
     }
 
-    header("location:profile.php?tambah=berhasil");
+    header("location:testimoni.php?tambah=berhasil");
 }
 
 $id  = isset($_GET['edit']) ? $_GET['edit'] : '';
-$queryEdit = mysqli_query($conn, "SELECT * FROM user WHERE id ='$id'");
+$queryEdit = mysqli_query($conn, "SELECT * FROM testimoni WHERE id ='$id'");
 $rowEdit   = mysqli_fetch_assoc($queryEdit);
 
 
@@ -42,7 +42,8 @@ $rowEdit   = mysqli_fetch_assoc($queryEdit);
 
 if (isset($_POST['edit'])) {
     $nama   = $_POST['nama'];
-    $alamat  = $_POST['alamat'];
+    $deskripsi  = $_POST['deskripsi'];
+    $profesi  = $_POST['profesi'];
 
     // jika user ingin memasukkan gambar
     if (!empty($_FILES['foto']['name'])) {
@@ -60,16 +61,15 @@ if (isset($_POST['edit'])) {
             unlink('upload/' . $rowEdit['foto']);
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
             // coding ubah/update disini
-            $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
-            alamat='$alamat', foto='$nama_foto' WHERE id='$id'");
+            $update = mysqli_query($conn, "UPDATE testimoni SET nama='$nama', deskripsi='$deskripsi', profesi='$profesi', foto='$nama_foto' WHERE id='$id'");
         }
     } else {
-        // kalo user tidak ingin memasukkan gambar
-        $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
-            alamat='$alamat' WHERE id='$id'");
+        // kalo testimoni tidak ingin memasukkan gambar
+        $update = mysqli_query($conn, "UPDATE testimoni SET nama='$nama', 
+            deskripsi='$deskripsi', profesi='$profesi' WHERE id='$id'");
     }
 
-    header("location:profile.php?ubah=berhasil");
+    header("location:testimoni.php?ubah=berhasil");
 }
 
 
@@ -346,7 +346,7 @@ if (isset($_POST['edit'])) {
                                                 placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['deskripsi'] : '' ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for=""> Masukan Alamat anda</label>
+                                            <label for=""> Tulis Profesi</label>
                                             <input type="text" class="form-control form-control-user"
                                                 id="" aria-describedby="" name="profesi"
                                                 placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['profesi'] : '' ?>">

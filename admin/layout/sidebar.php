@@ -58,6 +58,8 @@
                 <a class="collapse-item p-2" href="tambah-keahlian.php">Tambah Data Keterampilan</a>
                 <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
                 <a class="collapse-item" href="content.php">Konten</a>
+                <a class="collapse-item" href="about.php">About</a>
+                <a class="collapse-item" href="tambah-about.php">tambah-about</a>
                 <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
                 <a class="collapse-item" href="tambah-testimoni.php">Tambah Testimoni</a>
                 <a class="collapse-item" href="tambah-about.php">Tambah About</a>

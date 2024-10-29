@@ -72,7 +72,34 @@ body {
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
+/* Tabel-New-About */
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+  width: 100px; /* Adjust this width as needed */
+  white-space: nowrap;
+}
 
+/* Specific Widths for Columns */
+.table th:nth-child(2), .table td:nth-child(2) {
+  width: 120px; /* Foto column */
+}
+
+.table th:nth-child(3), .table td:nth-child(3),
+.table th:nth-child(5), .table td:nth-child(5) {
+  width: 150px; /* Description columns */
+}
+
+/* Auto expand action column */
+.table th:nth-last-child(1), .table td:nth-last-child(1) {
+  width: 120px; /* Actions column */
+}
+
+.table img {
+  max-width: 100px;
+  height: auto;
+}
+/* End-Of-Tabel-New-About */
 hr {
   box-sizing: content-box;
   height: 0;

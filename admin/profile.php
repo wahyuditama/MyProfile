@@ -294,11 +294,11 @@ if (isset($_GET['delete'])) {
                                         while ($row = mysqli_fetch_assoc($query)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $row['nama'] ?></td>
+                                                <td><?php echo $row['alamat'] ?></td>
                                                 <td>
                                                     <img width="100" src="upload/<?php echo $row['foto'] ?>" alt="">
                                                 </td>
-                                                <td><?php echo $row['nama'] ?></td>
-                                                <td><?php echo $row['alamat'] ?></td>
                                                 <td>
                                                     <a href="tambah-profile.php?edit=<?php echo $row['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>

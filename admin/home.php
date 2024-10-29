@@ -294,11 +294,11 @@ if (isset($_GET['delete'])) {
                                         while ($rowHeader = mysqli_fetch_assoc($queryHeader)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $rowHeader['header'] ?></td>
+                                                <td><?php echo $rowHeader['sub_judul'] ?></td>
                                                 <td>
                                                     <img width="100" src="upload/<?php echo $rowHeader['foto'] ?>" alt="">
                                                 </td>
-                                                <td><?php echo $rowHeader['header'] ?></td>
-                                                <td><?php echo $rowHeader['sub_judul'] ?></td>
                                                 <td>
                                                     <a href="tambah-home.php?edit=<?php echo $rowHeader['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>

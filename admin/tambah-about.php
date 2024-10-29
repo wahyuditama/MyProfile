@@ -2,73 +2,99 @@
 session_start();
 include 'database/db.php';
 
+// Jika button simpan di klik
 if (isset($_POST['simpan'])) {
-    $nama     = $_POST['nama'];
-    $alamat  = $_POST['alamat'];
+    $targetDir = "upload/";
+    $foto = $_FILES['foto'];
+    $fileName = basename($foto['name']);
+    $targetFilePath = $targetDir . time() . "_" . $fileName;
 
-    if (!empty($_FILES['foto']['name'])) {
-        $nama_foto = $_FILES['foto']['name'];
-        $ukuran_foto = $_FILES['foto']['size'];
+    // Cek jika file adalah gambar dan upload foto
+    $uploadImage = 1;
+    $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+    $imageTypes = ['jpg', 'png', 'jpeg', 'gif'];
 
-
-        $ext = array('png', 'jpg', 'jpeg');
-        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
-
-        if (!in_array($extFoto, $ext)) {
-            echo "Ext tidak ditemukan";
-            die;
+    if (in_array($imageFileType, $imageTypes)) {
+        if (move_uploaded_file($foto['tmp_name'], $targetFilePath)) {
+            echo "Foto berhasil diunggah.";
         } else {
-
-            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
-
-            $insert = mysqli_query($conn, "INSERT INTO user (nama, alamat,  foto)
-            VALUES ('$nama','$alamat','$nama_foto')");
+            echo "Error: Foto tidak dapat diunggah.";
+            $uploadImage = 0;
         }
     } else {
-        $insert = mysqli_query($conn, "INSERT INTO user (nama, alamat)
-            VALUES ('$nama','$alamat')");
+        echo "Error: Tipe file tidak diperbolehkan atau file terlalu besar.";
+        $uploadImage = 0;
     }
 
-    header("location:profile.php?tambah=berhasil");
+    if ($uploadImage) {
+        $deskripsi = $_POST['deskripsi'];
+        $profesi = $_POST['profesi'];
+        $deskripsi_profesi = $_POST['deskripsi_profesi'];
+        $website = $_POST['website'];
+        $kota = $_POST['kota'];
+        $umur = (int) $_POST['umur'];
+        $email = $_POST['email'];
+        $date = $_POST['date'];
+        $foto = $targetFilePath;
+
+        $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, date, foto) 
+                VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$date', '$foto')");
+
+        header("location:about.php?ubah=berhasil");
+    }
+
+    $conn->close();
 }
 
-$id  = isset($_GET['edit']) ? $_GET['edit'] : '';
-$queryEdit = mysqli_query($conn, "SELECT * FROM user WHERE id ='$id'");
-$rowEdit   = mysqli_fetch_assoc($queryEdit);
-
-
 // jika button edit di klik
+$id = isset($_GET['edit']) ? $_GET['edit'] : '';
+$queryEditAbout = mysqli_query($conn, "SELECT * FROM about WHERE id ='$id'");
+$rowEditAbout = mysqli_fetch_assoc($queryEditAbout);
 
+// Jika Button Edit Simpan Di klik
 if (isset($_POST['edit'])) {
-    $nama   = $_POST['nama'];
-    $alamat  = $_POST['alamat'];
+    $deskripsi = $_POST['deskripsi'];
+    $profesi = $_POST['profesi'];
+    $deskripsi_profesi = $_POST['deskripsi_profesi'];
+    $website = $_POST['website'];
+    $kota = $_POST['kota'];
+    $umur = (int) $_POST['umur'];
+    $email = $_POST['email'];
+    $date = $_POST['date'];
+    $foto = $rowEditAbout['foto']; // Gunakan foto lama sebagai default
 
     // jika user ingin memasukkan gambar
     if (!empty($_FILES['foto']['name'])) {
-        $nama_foto = $_FILES['foto']['name'];
-        $ukuran_foto = $_FILES['foto']['size'];
-
-        // png, jpg, jpeg
+        $nama_foto = basename($_FILES['foto']['name']);
+        $targetFilePath = $targetDir . time() . "_" . $nama_foto;
         $ext = array('png', 'jpg', 'jpeg');
-        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
+        $extFoto = strtolower(pathinfo($nama_foto, PATHINFO_EXTENSION));
 
         if (!in_array($extFoto, $ext)) {
             echo "Extensi gambar tidak ditemukan";
             die;
         } else {
-            unlink('upload/' . $rowEdit['foto']);
-            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
-            // coding ubah/update disini
-            $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
-            alamat='$alamat', foto='$nama_foto' WHERE id='$id'");
+            unlink('upload/' . $rowEditAbout['foto']); // Hapus foto lama
+            if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetFilePath)) {
+                $foto = $targetFilePath; // Perbarui variabel foto dengan path baru
+            }
         }
-    } else {
-        // kalo user tidak ingin memasukkan gambar
-        $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
-            alamat='$alamat' WHERE id='$id'");
     }
 
-    header("location:profile.php?ubah=berhasil");
+    // Perbarui data
+    $update = mysqli_query($conn, "UPDATE about SET 
+        deskripsi = '$deskripsi', 
+        profesi = '$profesi', 
+        deskripsi_profesi = '$deskripsi_profesi', 
+        website = '$website', 
+        kota = '$kota', 
+        umur = $umur, 
+        email = '$email', 
+        date = '$date', 
+        foto = '$foto' 
+        WHERE id = $id");
+
+    header("location:about.php?ubah=berhasil");
 }
 
 
@@ -328,42 +354,75 @@ if (isset($_POST['edit'])) {
                     <div class="row justify-content-center">
 
                         <div class="row">
-                            <div class="card" style="width: 38rem;">
-                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> About </div>
+                            <div class="card" style="width: 58rem;">
+                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> About</div>
                                 <div class="card-body">
                                     <form action="" method="post" enctype="multipart/form-data">
-                                       <div class="col-6">
-                                         <div class="form-group">
-                                            <label for="username">masukan Deskripsi</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="deskripsi"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['deskripsi'] : '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for=""> Masukan nama profesi anda</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="profesi"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['profesi'] : '' ?>">
-                                        </div>
-                                       </div>
-                                       <div class="col-md-6"></div>
-                                        
-                                            <div class="form-group">
-                                                <label for=""> Masukan foto anda disini</label><br>
-                                                <input type="file" class="" name="foto"
-                                                    id="e" placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['foto'] : '' ?>">
+                                        <div class="row">
+                                            <!-- Left Column (col-6) -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="deskripsi">Masukan Deskripsi</label>
+                                                    <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['deskripsi'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profesi">Masukan Nama Profesi Anda</label>
+                                                    <input type="text" class="form-control" id="profesi" name="profesi"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['profesi'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="deskripsi_profesi">Deskripsi Profesi</label>
+                                                    <input type="text" class="form-control" id="deskripsi_profesi" name="deskripsi_profesi"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['deskripsi_profesi'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="website">Website</label>
+                                                    <input type="url" class="form-control" id="website" name="website"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['website'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="website">foto</label>
+                                                    <input type="file" class="form-control" id="foto" name="foto"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['foto'] : '' ?>">
+                                                </div>
                                             </div>
-                                       
-                                        <button href="" type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'simpan' ?>" class="btn btn-primary btn-user btn-block">
+
+                                            <!-- Right Column (col-6) -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="kota">Kota</label>
+                                                    <input type="text" class="form-control" id="kota" name="kota"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['kota'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="umur">Umur</label>
+                                                    <input type="number" class="form-control" id="umur" name="umur"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['umur'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['email'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="date">Tanggal</label>
+                                                    <input type="date" class="form-control" id="date" name="date"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['date'] : '' ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <button type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'simpan' ?>" class="btn btn-primary btn-user btn-block">
                                             Masukan disini
                                         </button>
                                         <hr>
-
                                     </form>
                                 </div>
                             </div>
-
                         </div>
+
 
                         <!-- Content Row -->
 

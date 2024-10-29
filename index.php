@@ -1,3 +1,12 @@
+<?php
+include 'admin/database/db.php';
+
+$queryProfile = mysqli_query($conn, "SELECT * FROM  user ");
+$rowProfile = mysqli_fetch_assoc($queryProfile);
+
+$sqlAbout = mysqli_query($conn, "SELECT * FROM about");
+$rowA = mysqli_fetch_assoc($sqlAbout);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,10 +91,10 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <section id="hero" class="hero section dark-background" style=" background: url(admin/upload/<?php echo $rowProfile['foto'] ?>) top center no-repeat;">
 
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <h2>Hi, I'm Alice!</h2>
+        <h2><?php echo $rowProfile['nama'] ?></h2>
         <p>I am a graphic designer living in New York<br></p>
         <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
       </div>
@@ -105,7 +114,7 @@
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="landing_page/assets/img/profile-img.jpg" class="img-fluid" alt="">
+            <img src="admim/upload/<?php echo $rowA['foto'] ?>" class="img-fluid" alt="">
           </div>
           <div class="col-lg-8 content">
             <h2>UI/UX Designer &amp; Web Developer.</h2>
@@ -117,7 +126,7 @@
               <div class="col-lg-6">
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><?php echo $rowA['website'] ?></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>New York, USA</span></li>
                 </ul>
@@ -340,7 +349,7 @@
     </section><!-- /Services Section -->
 
     <!-- Portfolio Section -->
-    
+
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
 
