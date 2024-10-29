@@ -1,43 +1,78 @@
 <?php
+
 session_start();
 include 'database/db.php';
 $pesan = "";
 
 if (isset($_POST['submit'])) {
-    $judul = $_POST['judul'];
-    $paragraf = $_POST['paragraf'];
-    $info = $_POST['info'];
-    
-   $sqlInfo = mysqli_query($conn, "INSERT INTO capabilitas (judul,paragraf,info) VALUES ('$judul','$paragraf','$info')");
-   header('location:keahlian.php?tambah=berhasil');
-   
+    $judul     = $_POST['judul'];
+    $paragraf  = $_POST['paragraf'];
+    $info  = $_POST['info'];
+
+    if (!empty($_FILES['foto']['name'])) {
+        $nama_foto = $_FILES['foto']['name'];
+        $ukuran_foto = $_FILES['foto']['size'];
+
+
+        $ext = array('png', 'jpg', 'jpeg');
+        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
+
+        if (!in_array($extFoto, $ext)) {
+            echo "Ext tidak ditemukan";
+            die;
+        } else {
+
+            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
+
+            $insert = mysqli_query($conn, "INSERT INTO capabilitas (judul, paragraf, info, foto)
+            VALUES ('$judul','$paragraf','$info','$nama_foto')");
+        }
+    } else {
+        $insert = mysqli_query($conn, "INSERT INTO capabilitas (judul, paragraf, info)
+            VALUES ('$judul','$paragraf','$info')");
+    }
+
+    header("location:keahlian.php?tambah=berhasil");
 }
 
-$id = isset($_GET['edit']) ? $_GET['edit'] : '';
-$editArtikel = mysqli_query(
-    $conn,
-    "SELECT * FROM capabilitas WHERE id = '$id'"
-);
-$rowEdit = mysqli_fetch_assoc($editArtikel);
+$id  = isset($_GET['edit']) ? $_GET['edit'] : '';
+$queryEdit = mysqli_query($conn, "SELECT * FROM capabilitas WHERE id ='$id'");
+$rowEdit   = mysqli_fetch_assoc($queryEdit);
+
+
+
 
 if (isset($_POST['edit'])) {
     $judul   = $_POST['judul'];
     $paragraf  = $_POST['paragraf'];
-    $info = $_POST['info'];
+    $info  = $_POST['info'];
 
-    $update = mysqli_query($conn, "UPDATE capabilitas SET judul='$judul', paragraf='$paragraf', info='$info' WHERE id='$id'");
-    header('location:keahlian.php?ubah=berhasil');
+
+    if (!empty($_FILES['foto']['name'])) {
+        $nama_foto = $_FILES['foto']['name'];
+        $ukuran_foto = $_FILES['foto']['size'];
+
+        $ext = array('png', 'jpg', 'jpeg');
+        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
+
+        if (!in_array($extFoto, $ext)) {
+            echo "Extensi gambar tidak ditemukan";
+            die;
+        } else {
+            unlink('upload/' . $rowEdit['foto']);
+            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
+     
+            $update = mysqli_query($conn, "UPDATE capabilitas SET judul='$judul', 
+            paragraf='$paragraf', info='$info', foto='$nama_foto' WHERE id='$id'");
+        }
+    } else {
+  
+        $update = mysqli_query($conn, "UPDATE capabilitas SET judul='$judul', 
+            paragraf='$paragraf', info='$info' WHERE id='$id'");
+    }
+
+    header("location:keahlian.php?ubah=berhasil");
 }
-
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $delete = mysqli_query($conn, "DELETE FROM capabilitas WHERE id='$id'");
-    header("location:keahlian.php?hapus=berhasil");
-}
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -298,7 +333,7 @@ if (isset($_GET['delete'])) {
                                 <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> Keterampilan</div>
                                 <?php echo $pesan ?>
                                 <div class="card-body">
-                                    <form action="" method="post">
+                                    <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="keterampilan">Input Judul keterampialn anda disini</label>
                                             <input type="text" class="form-control form-control-user"
@@ -317,7 +352,11 @@ if (isset($_GET['delete'])) {
                                                 id=""  name="info"
                                                 placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['info'] : '' ?>">
                                         </div>
-                                        
+                                        <div class="form-group">
+                                                <label for=""> Masukan foto anda disini</label><br>
+                                                <input type="file" class="" name="foto"
+                                                    id="e" placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['foto'] : '' ?>">
+                                            </div>
                                         <button  type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'submit' ?>" class="btn btn-primary btn-user btn-block">
                                             Masukan data keterampilan
                                         </button>

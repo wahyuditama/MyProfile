@@ -37,7 +37,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="profile.php">Profile</a>
+                <a class="collapse-item" href="home.php">Home</a>
                 <a class="collapse-item" href="tambah-profile.php">Tambah Profile</a>
+                <a class="collapse-item" href="tambah-home.php">tambah-home</a>
             </div>
         </div>
     </li>
@@ -57,7 +59,8 @@
                 <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
                 <a class="collapse-item" href="content.php">Konten</a>
                 <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <a class="collapse-item" href="tambah-testimoni.php">Tambah Testimoni</a>
+                <a class="collapse-item" href="tambah-about.php">Tambah About</a>
             </div>
         </div>
     </li>

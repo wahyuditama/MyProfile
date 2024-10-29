@@ -3,13 +3,13 @@ session_start();
 include 'database/db.php';
 
 if (isset($_POST['simpan'])) {
-    $judul_konten     = $_POST['judul_konten'];
-    $isi_konten  = $_POST['isi_konten'];
-    $keterangan  = $_POST['keterangan'];
+    $nama     = $_POST['nama'];
+    $alamat  = $_POST['alamat'];
 
     if (!empty($_FILES['foto']['name'])) {
         $nama_foto = $_FILES['foto']['name'];
         $ukuran_foto = $_FILES['foto']['size'];
+
 
         $ext = array('png', 'jpg', 'jpeg');
         $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
@@ -21,30 +21,29 @@ if (isset($_POST['simpan'])) {
 
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
-            $insert = mysqli_query($conn, "INSERT INTO konten (judul_konten, isi_konten, keterangan, foto)
-            VALUES ('$judul_konten','$isi_konten','$keterangan','$nama_foto')");
+            $insert = mysqli_query($conn, "INSERT INTO user (nama, alamat,  foto)
+            VALUES ('$nama','$alamat','$nama_foto')");
         }
     } else {
-        $insert = mysqli_query($conn, "INSERT INTO konten (judul_konten, isi_konten)
-            VALUES ('$judul_konten','$isi_konten')");
+        $insert = mysqli_query($conn, "INSERT INTO user (nama, alamat)
+            VALUES ('$nama','$alamat')");
     }
 
-    header("location:content.php?tambah=berhasil");
+    header("location:profile.php?tambah=berhasil");
 }
 
 $id  = isset($_GET['edit']) ? $_GET['edit'] : '';
-$queryEdit = mysqli_query($conn, "SELECT * FROM konten WHERE id ='$id'");
+$queryEdit = mysqli_query($conn, "SELECT * FROM user WHERE id ='$id'");
 $rowEdit   = mysqli_fetch_assoc($queryEdit);
 
 
 // jika button edit di klik
 
 if (isset($_POST['edit'])) {
-    $judul_konten   = $_POST['judul_konten'];
-    $isi_konten  = $_POST['isi_konten'];
-    $keterangan  = $_POST['keterangan'];
+    $nama   = $_POST['nama'];
+    $alamat  = $_POST['alamat'];
 
-
+    // jika user ingin memasukkan gambar
     if (!empty($_FILES['foto']['name'])) {
         $nama_foto = $_FILES['foto']['name'];
         $ukuran_foto = $_FILES['foto']['size'];
@@ -59,17 +58,17 @@ if (isset($_POST['edit'])) {
         } else {
             unlink('upload/' . $rowEdit['foto']);
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
-
-            $update = mysqli_query($conn, "UPDATE konten SET judul_konten='$judul_konten', 
-            isi_konten='$isi_konten', keterangan='$keterangan', foto='$nama_foto' WHERE id='$id'");
+            // coding ubah/update disini
+            $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
+            alamat='$alamat', foto='$nama_foto' WHERE id='$id'");
         }
     } else {
-
-        $update = mysqli_query($conn, "UPDATE konten SET judul_konten='$judul_konten', 
-            isi_konten='$isi_konten', keterangan='$keterangan' WHERE id='$id'");
+        // kalo user tidak ingin memasukkan gambar
+        $update = mysqli_query($conn, "UPDATE user SET nama='$nama', 
+            alamat='$alamat' WHERE id='$id'");
     }
 
-    header("location:content.php?ubah=berhasil");
+    header("location:profile.php?ubah=berhasil");
 }
 
 
@@ -320,7 +319,7 @@ if (isset($_POST['edit'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Konten </h1>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard About</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -328,36 +327,33 @@ if (isset($_POST['edit'])) {
                     <!-- Content Row -->
                     <div class="row justify-content-center">
 
-                        <div class="col-md-6">
+                        <div class="row">
                             <div class="card" style="width: 38rem;">
-                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> Konten</div>
+                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> About </div>
                                 <div class="card-body">
                                     <form action="" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="username">masukan Judul Konten</label>
+                                       <div class="col-6">
+                                         <div class="form-group">
+                                            <label for="username">masukan Deskripsi</label>
                                             <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="judul_konten"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['judul_konten'] : '' ?>">
+                                                id="" aria-describedby="" name="deskripsi"
+                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['deskripsi'] : '' ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for=""> Masukan Isi Konten Disini</label>
+                                            <label for=""> Masukan nama profesi anda</label>
                                             <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="isi_konten"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['isi_konten'] : '' ?>">
+                                                id="" aria-describedby="" name="profesi"
+                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['profesi'] : '' ?>">
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for=""> Masukan foto anda disini</label><br>
-                                            <input type="file" class="" name="foto"
-                                                id="e" placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['foto'] : '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for=""> Masukan keterangan Konten Disini</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="keterangan"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['keterangan'] : '' ?>">
-                                        </div>
-
+                                       </div>
+                                       <div class="col-md-6"></div>
+                                        
+                                            <div class="form-group">
+                                                <label for=""> Masukan foto anda disini</label><br>
+                                                <input type="file" class="" name="foto"
+                                                    id="e" placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['foto'] : '' ?>">
+                                            </div>
+                                       
                                         <button href="" type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'simpan' ?>" class="btn btn-primary btn-user btn-block">
                                             Masukan disini
                                         </button>

@@ -1,15 +1,12 @@
 <?php
 session_start();
 include 'database/db.php';
-// munculkan / pilih sebuah atau semua kolom dari table user
+
 $queryArtikel = mysqli_query($conn, "SELECT * FROM capabilitas");
-// mysqli_fetch_assoc($query) = untuk menjadikan hasil query menjadi sebuah data (object,array)
 
-// jika parameternya ada ?delete=nilai param
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete']; //mengambil nilai params
+    $id = $_GET['delete']; 
 
-    // query / perintah hapus
     $delete = mysqli_query($conn, "DELETE FROM capabilitas  WHERE id ='$id'");
     header("location:keahlian.php?hapus=berhasil");
 }
@@ -260,7 +257,7 @@ if (isset($_GET['delete'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard Profile</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard Keterampil</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
@@ -286,6 +283,7 @@ if (isset($_GET['delete'])) {
                                             <th>Judul Artikel</th>
                                             <th>Isi / Data artikel</th>
                                             <th>Keterangan</th>
+                                            <th>Foto</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -297,6 +295,7 @@ if (isset($_GET['delete'])) {
                                                 <td><?php echo $rowArtikel['judul'] ?></td>
                                                 <td><?php echo $rowArtikel['paragraf'] ?></td>
                                                 <td><?php echo $rowArtikel['info'] ?></td>
+                                                <td><img src="upload/<?php echo $rowArtikel['foto'] ?>" width="115" alt=""> </td>
                                                 <td>
                                                     <a href="tambah-keahlian.php?edit=<?php echo $rowArtikel['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>

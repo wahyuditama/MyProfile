@@ -1,78 +1,18 @@
 <?php
 session_start();
 include 'database/db.php';
+// munculkan / pilih sebuah atau semua kolom dari table user
+$query = mysqli_query($conn, "SELECT * FROM user");
+// mysqli_fetch_assoc($query) = untuk menjadikan hasil query menjadi sebuah data (object,array)
 
-if (isset($_POST['simpan'])) {
-    $judul_konten     = $_POST['judul_konten'];
-    $isi_konten  = $_POST['isi_konten'];
-    $keterangan  = $_POST['keterangan'];
+// jika parameternya ada ?delete=nilai param
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete']; //mengambil nilai params
 
-    if (!empty($_FILES['foto']['name'])) {
-        $nama_foto = $_FILES['foto']['name'];
-        $ukuran_foto = $_FILES['foto']['size'];
-
-        $ext = array('png', 'jpg', 'jpeg');
-        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
-
-        if (!in_array($extFoto, $ext)) {
-            echo "Ext tidak ditemukan";
-            die;
-        } else {
-
-            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
-
-            $insert = mysqli_query($conn, "INSERT INTO konten (judul_konten, isi_konten, keterangan, foto)
-            VALUES ('$judul_konten','$isi_konten','$keterangan','$nama_foto')");
-        }
-    } else {
-        $insert = mysqli_query($conn, "INSERT INTO konten (judul_konten, isi_konten)
-            VALUES ('$judul_konten','$isi_konten')");
-    }
-
-    header("location:content.php?tambah=berhasil");
+    // query / perintah hapus
+    $delete = mysqli_query($conn, "DELETE FROM user  WHERE id ='$id'");
+    header("location:profile.php?hapus=berhasil");
 }
-
-$id  = isset($_GET['edit']) ? $_GET['edit'] : '';
-$queryEdit = mysqli_query($conn, "SELECT * FROM konten WHERE id ='$id'");
-$rowEdit   = mysqli_fetch_assoc($queryEdit);
-
-
-// jika button edit di klik
-
-if (isset($_POST['edit'])) {
-    $judul_konten   = $_POST['judul_konten'];
-    $isi_konten  = $_POST['isi_konten'];
-    $keterangan  = $_POST['keterangan'];
-
-
-    if (!empty($_FILES['foto']['name'])) {
-        $nama_foto = $_FILES['foto']['name'];
-        $ukuran_foto = $_FILES['foto']['size'];
-
-        // png, jpg, jpeg
-        $ext = array('png', 'jpg', 'jpeg');
-        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
-
-        if (!in_array($extFoto, $ext)) {
-            echo "Extensi gambar tidak ditemukan";
-            die;
-        } else {
-            unlink('upload/' . $rowEdit['foto']);
-            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
-
-            $update = mysqli_query($conn, "UPDATE konten SET judul_konten='$judul_konten', 
-            isi_konten='$isi_konten', keterangan='$keterangan', foto='$nama_foto' WHERE id='$id'");
-        }
-    } else {
-
-        $update = mysqli_query($conn, "UPDATE konten SET judul_konten='$judul_konten', 
-            isi_konten='$isi_konten', keterangan='$keterangan' WHERE id='$id'");
-    }
-
-    header("location:content.php?ubah=berhasil");
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -320,103 +260,104 @@ if (isset($_POST['edit'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Konten </h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard Testimoni</h1>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row justify-content-center">
 
-                        <div class="col-md-6">
-                            <div class="card" style="width: 38rem;">
-                                <div class="card-header"><?php echo isset($_GET['edit']) ? 'Edit' : 'Tambah' ?> Konten</div>
-                                <div class="card-body">
-                                    <form action="" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="username">masukan Judul Konten</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="judul_konten"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['judul_konten'] : '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for=""> Masukan Isi Konten Disini</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="isi_konten"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['isi_konten'] : '' ?>">
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for=""> Masukan foto anda disini</label><br>
-                                            <input type="file" class="" name="foto"
-                                                id="e" placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['foto'] : '' ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for=""> Masukan keterangan Konten Disini</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="keterangan"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['keterangan'] : '' ?>">
-                                        </div>
-
-                                        <button href="" type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'simpan' ?>" class="btn btn-primary btn-user btn-block">
-                                            Masukan disini
-                                        </button>
-                                        <hr>
-
-                                    </form>
+                    <div class="card  shadow mb-4">
+                        <div class="card-body">
+                            <?php if (isset($_GET['hapus'])): ?>
+                                <div class="alert alert-success" role="alert">
+                                    Data berhasil dihapus
                                 </div>
+                            <?php endif ?>
+                            <div align="right" class="mb-3">
+                                <a href="tambah-profile.php" class="btn btn-primary">Tambah</a>
                             </div>
-
+                            <div class="table-responsive">
+                                <table class="table table-bordered" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>alamat</th>
+                                            <th>Foto</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1;
+                                        while ($row = mysqli_fetch_assoc($query)) { ?>
+                                            <tr>
+                                                <td><?php echo $no++ ?></td>
+                                                <td>
+                                                    <img width="100" src="upload/<?php echo $row['foto'] ?>" alt="">
+                                                </td>
+                                                <td><?php echo $row['nama'] ?></td>
+                                                <td><?php echo $row['alamat'] ?></td>
+                                                <td>
+                                                    <a href="tambah-profile.php?edit=<?php echo $row['id'] ?>" class="btn btn-success btn-sm">
+                                                        <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>
+                                                    </a>
+                                                    <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')"
+                                                        href="profile.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">
+                                                        <span class="tf-icon bx bx-trash bx-18px ">Delete</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Content Row -->
+                    <!-- Content Row -->
 
-                        <div class="row">
+                    <div class="row">
 
-
-                        </div>
-
-                        <!-- Content Row -->
-                        <div class="row">
-
-
-
-                        </div>
 
                     </div>
-                    <!-- /.container-fluid -->
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+
+
+                    </div>
 
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <!-- End of Footer -->
+                <!-- /.container-fluid -->
 
             </div>
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <?php include 'layout/footer.php' ?>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <!-- Bootstrap core JavaScript-->
-        <!-- Core plugin JavaScript-->
-        <!-- Custom scripts for all pages-->
-        <!-- Page level plugins -->
-        <!-- Page level custom scripts -->
-        <?php include 'layout/js.php' ?>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <!-- Bootstrap core JavaScript-->
+    <!-- Core plugin JavaScript-->
+    <!-- Custom scripts for all pages-->
+    <!-- Page level plugins -->
+    <!-- Page level custom scripts -->
+    <?php include 'layout/js.php' ?>
 
 </body>
 
