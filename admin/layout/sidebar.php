@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -38,8 +38,12 @@
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="profile.php">Profile</a>
                 <a class="collapse-item" href="home.php">Home</a>
-                <a class="collapse-item" href="tambah-profile.php">Tambah Profile</a>
-                <a class="collapse-item" href="tambah-home.php">tambah-home</a>
+                <a class="collapse-item" href="content.php">Konten</a>
+                <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
+                <a class="collapse-item" href="testimoni.php">Testimoni</a>
+                <a class="collapse-item" href="contact.php">Contact</a>
+                <a class="collapse-item" href="about.php">About</a>
+                <a class="collapse-item" href="footer.php">footer</a>
             </div>
         </div>
     </li>
@@ -56,13 +60,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <a class="collapse-item p-2" href="tambah-keahlian.php">Tambah Data Keterampilan</a>
-                <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
-                <a class="collapse-item" href="content.php">Konten</a>
-                <a class="collapse-item" href="about.php">About</a>
-                <a class="collapse-item" href="tambah-about.php">tambah-about</a>
+                <a class="collapse-item" href="tambah-profile.php">Tambah Profile</a>
+                <a class="collapse-item" href="tambah-home.php">Tambah-Home</a>
+                <a class="collapse-item" href="tambah-about.php">Tambah-About</a>
                 <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
                 <a class="collapse-item" href="tambah-testimoni.php">Tambah Testimoni</a>
                 <a class="collapse-item" href="tambah-about.php">Tambah About</a>
+                <a class="collapse-item" href="tambah-footer.php">Tambah Footer</a>
             </div>
         </div>
     </li>

@@ -1,17 +1,16 @@
 <?php
 session_start();
 include 'database/db.php';
-// munculkan / pilih sebuah atau semua kolom dari table user
-$queryHeader = mysqli_query($conn, "SELECT * FROM home");
-// mysqli_fetch_assoc($query) = untuk menjadikan hasil query menjadi sebuah data (object,array)
 
-// jika parameternya ada ?delete=nilai param
+$queryFooter = mysqli_query($conn, "SELECT * FROM footer");
+
+
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete']; //mengambil nilai params
+    $id = $_GET['delete'];
 
     // query / perintah hapus
-    $delete = mysqli_query($conn, "DELETE FROM home  WHERE id ='$id'");
-    header("location:home.php?hapus=berhasil");
+    $deletefooter = mysqli_query($conn, "DELETE FROM footer  WHERE id ='$id'");
+    header("location:footer.php?hapus=berhasil");
 }
 ?>
 
@@ -30,8 +29,8 @@ if (isset($_GET['delete'])) {
 
     <!-- Custom fonts for this template-->
     <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/sb-admin-2.css">
     <?php include 'layout/css.php' ?>
-
 
 
 </head>
@@ -60,7 +59,7 @@ if (isset($_GET['delete'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard Home</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard Footer</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
@@ -76,35 +75,43 @@ if (isset($_GET['delete'])) {
                                 </div>
                             <?php endif ?>
                             <div align="right" class="mb-3">
-                                <a href="tambah-home.php" class="btn btn-primary">Tambah</a>
+                                <a href="tambah-footer.php" class="btn btn-primary">Tambah</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" width="100%">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Header</th>
-                                            <th>Sub_Judul</th>
-                                            <th>Foto</th>
+                                            <th>deskripsi</th>
+                                            <th>Link Twitter</th>
+                                            <th>Link Youtube</th>
+                                            <th>Link Facebook</th>
+                                            <th>Link instagram</th>
+                                            <th>Link Linkedin</th>
                                             <th>Aksi</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;
-                                        while ($rowHeader = mysqli_fetch_assoc($queryHeader)) { ?>
+                                        while ($rowfooter = mysqli_fetch_assoc($queryFooter)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
-                                                <td><?php echo $rowHeader['header'] ?></td>
-                                                <td><?php echo $rowHeader['sub_judul'] ?></td>
+                                               
+                                                <td><?php echo $rowfooter['deskripsi'] ?></td>
+                                                <td><?php echo $rowfooter['twitter'] ?></td>
+                                                
+                                                <td><?php echo $rowfooter['youtube'] ?></td>
+                                                <td><?php echo $rowfooter['ig'] ?></td>
+                                                <td><?php echo $rowfooter['fb'] ?></td>
+                                                <td><?php echo $rowfooter['linkedin'] ?></td>
+                                                
                                                 <td>
-                                                    <img width="100" src="upload/<?php echo $rowHeader['foto'] ?>" alt="">
-                                                </td>
-                                                <td>
-                                                    <a href="tambah-home.php?edit=<?php echo $rowHeader['id'] ?>" class="btn btn-success btn-sm">
+                                                    <a href="tambah-footer.php?edit=<?php echo $rowfooter['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>
                                                     </a>
                                                     <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')"
-                                                        href="home.php?delete=<?php echo $rowHeader['id'] ?>" class="btn btn-danger btn-sm">
+                                                        href="footer.php?delete=<?php echo $rowfooter['id'] ?>" class="btn btn-danger btn-sm">
                                                         <span class="tf-icon bx bx-trash bx-18px ">Delete</span>
                                                     </a>
                                                 </td>

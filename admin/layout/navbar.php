@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
@@ -189,13 +190,13 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                              <!-- <form >
-                              <a class="dropdown-item"  href="logout.php" data-toggle="modal" name="logout" type="submit" tydata-target="#logoutModal">
+                              <form action="logout.php" method="post" >
+                              <button class="dropdown-item"  href="" data-toggle="modal" name="logout" type="submit" tydata-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
-                              </form> -->
-                              <!-- <a href="../logout.php" class='btn btn-primary'>Logout</a> -->
+                                </button>
+                              </form> 
+                              <!-- <a href="logout.php" class='btn btn-primary'>Logout</a> -->
                             </div>
                         </li>
 

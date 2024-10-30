@@ -2,7 +2,7 @@
 session_start();
 include 'database/db.php';
 // munculkan / pilih sebuah atau semua kolom dari table user
-$queryHeader = mysqli_query($conn, "SELECT * FROM home");
+$queryContact = mysqli_query($conn, "SELECT * FROM contact");
 // mysqli_fetch_assoc($query) = untuk menjadikan hasil query menjadi sebuah data (object,array)
 
 // jika parameternya ada ?delete=nilai param
@@ -10,8 +10,8 @@ if (isset($_GET['delete'])) {
     $id = $_GET['delete']; //mengambil nilai params
 
     // query / perintah hapus
-    $delete = mysqli_query($conn, "DELETE FROM home  WHERE id ='$id'");
-    header("location:home.php?hapus=berhasil");
+    $deleteContact = mysqli_query($conn, "DELETE FROM contact  WHERE id ='$id'");
+    header("location:contact.php?hapus=berhasil");
 }
 ?>
 
@@ -60,7 +60,7 @@ if (isset($_GET['delete'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard Home</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard Pesan Pengunjung</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
@@ -76,35 +76,33 @@ if (isset($_GET['delete'])) {
                                 </div>
                             <?php endif ?>
                             <div align="right" class="mb-3">
-                                <a href="tambah-home.php" class="btn btn-primary">Tambah</a>
+                                <a href="tambah-content.php" class="btn btn-primary">Tambah</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" width="100%">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Header</th>
-                                            <th>Sub_Judul</th>
-                                            <th>Foto</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                            <th>Subjek</th>
+                                            <th>Pesan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;
-                                        while ($rowHeader = mysqli_fetch_assoc($queryHeader)) { ?>
+                                        while ($rowContact = mysqli_fetch_assoc($queryContact)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
-                                                <td><?php echo $rowHeader['header'] ?></td>
-                                                <td><?php echo $rowHeader['sub_judul'] ?></td>
+                                                <td><?php echo $rowContact['nama'] ?></td>
+                                                <td><?php echo $rowContact['email'] ?></td>
+                                                <td><?php echo $rowContact['subjek'] ?></td>
+                                                <td><?php echo $rowContact['pesan'] ?></td>
+
                                                 <td>
-                                                    <img width="100" src="upload/<?php echo $rowHeader['foto'] ?>" alt="">
-                                                </td>
-                                                <td>
-                                                    <a href="tambah-home.php?edit=<?php echo $rowHeader['id'] ?>" class="btn btn-success btn-sm">
-                                                        <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>
-                                                    </a>
                                                     <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')"
-                                                        href="home.php?delete=<?php echo $rowHeader['id'] ?>" class="btn btn-danger btn-sm">
+                                                        href="contact.php?delete=<?php echo $rowContact['id'] ?>" class="btn btn-danger btn-sm">
                                                         <span class="tf-icon bx bx-trash bx-18px ">Delete</span>
                                                     </a>
                                                 </td>

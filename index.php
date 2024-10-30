@@ -1,11 +1,18 @@
 <?php
+session_abort();
 include 'admin/database/db.php';
+//Konten Projek
+$queryAhli = mysqli_query($conn, "SELECT * FROM capabilitas ");
 
+//konten home
+$queryHome = mysqli_query($conn, "SELECT * FROM  home");
+$rowHome = mysqli_fetch_assoc($queryHome);
+// Konten Profile
 $queryProfile = mysqli_query($conn, "SELECT * FROM  user ");
 $rowProfile = mysqli_fetch_assoc($queryProfile);
-
-$sqlAbout = mysqli_query($conn, "SELECT * FROM about");
-$rowA = mysqli_fetch_assoc($sqlAbout);
+//Konten Kontak
+$sqlA = mysqli_query($conn, "SELECT * FROM about");
+$rowA = mysqli_fetch_assoc($sqlA);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +50,21 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    .contact .php-email-form-new button[type=submit] {
+      color: var(--contrast-color);
+      background: var(--accent-color);
+      border: 0;
+      padding: 10px 30px;
+      transition: 0.4s;
+      border-radius: 50px;
+    }
+
+    .contact .php-email-form-new button[type=submit]:hover {
+      background: color-mix(in srgb, var(--accent-color), transparent 25%);
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -53,7 +75,7 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="landing_page/assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Lonely</h1>
+        <h1 class="sitename"><?php echo $rowHome['header'] ?></h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -62,22 +84,10 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              <li><a href="admin/login.php">Setting</a></li>
+
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
@@ -114,7 +124,7 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="admim/upload/<?php echo $rowA['foto'] ?>" class="img-fluid" alt="">
+            <img src="admin/upload/<?php echo $rowA['foto'] ?>" class="img-fluid" alt="">
           </div>
           <div class="col-lg-8 content">
             <h2>UI/UX Designer &amp; Web Developer.</h2>
@@ -152,195 +162,59 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
     </section><!-- /About Section -->
 
     <!-- Skills Section -->
-    <section id="skills" class="skills section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>CSS</span> <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>JavaScript</span> <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>PHP</span> <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>WordPress/CMS</span> <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>Photoshop</span> <i class="val">55%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Skills Section -->
 
     <!-- Resume Section -->
-    <section id="resume" class="resume section light-background">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Sumary</h3>
-
-            <div class="resume-item pb-0">
-              <h4>Brandon Johnson</h4>
-              <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
-              <ul>
-                <li>Portland par 127,Orlando, FL</li>
-                <li>(123) 456-7891</li>
-                <li>alice.barkley@example.com</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Master of Fine Arts &amp; Graphic Design</h4>
-              <h5>2015 - 2016</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-              <h5>2010 - 2014</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Senior graphic design specialist</h4>
-              <h5>2019 - Present</h5>
-              <p><em>Experion, New York, NY </em></p>
-              <ul>
-                <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-                <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-                <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-                <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Graphic design specialist</h4>
-              <h5>2017 - 2018</h5>
-              <p><em>Stepping Stone Advertising, New York, NY</em></p>
-              <ul>
-                <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Resume Section -->
 
     <!-- Services Section -->
     <section id="services" class="services section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
+        <h2>Projek</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
 
         <div class="row gy-4">
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-activity icon"></i></div>
-              <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          <?php
+          while ($rowAhli = mysqli_fetch_assoc($queryAhli)) { ?>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+              <div class="service-item position-relative">
+                <div class="icon"><img src="admin/upload/<?php echo $rowAhli['foto'] ?>" style="width: 100px; height:auto;"></div>
+                <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              </div>
             </div>
-          </div><!-- End Service Item -->
+          <?php } ?>
 
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+
+          <!-- <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
               <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
               <h4><a href="" class="stretched-link">Sed ut perspici</a></h4>
               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
             </div>
-          </div><!-- End Service Item -->
-
+          </div>
+          
           <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
               <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
               <h4><a href="" class="stretched-link">Magni Dolores</a></h4>
               <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
             </div>
-          </div><!-- End Service Item -->
-
+          </div>
+          
           <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item position-relative">
               <div class="icon"><i class="bi bi-broadcast icon"></i></div>
               <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
               <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
             </div>
-          </div><!-- End Service Item -->
+          </div> -->
+          <!-- End Service Item -->
 
         </div>
 
@@ -390,11 +264,11 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
-              <div class="testimonial-item" "="">
-            <p>
-              <i class=" bi bi-quote quote-icon-left"></i>
-                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
+              <div class="testimonial-item">
+                <p>
+                  <i class=" bi bi-quote quote-icon-left"></i>
+                  <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
                 </p>
                 <img src="landing_page/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                 <h3>Saul Goodman</h3>
@@ -503,23 +377,23 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="actioncontact.php" method="post" class="php-email-form-new" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="nama" class="form-control" placeholder="Your Name" required>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="text" class="form-control" name="subjek" placeholder="Subject" required>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <textarea class="form-control" name="pesan" rows="6" placeholder="Message"></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -527,7 +401,7 @@ $rowA = mysqli_fetch_assoc($sqlAbout);
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" name="submit">Send Message</button>
                 </div>
 
               </div>
