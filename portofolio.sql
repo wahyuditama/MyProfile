@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2024 at 10:46 AM
+-- Generation Time: Oct 30, 2024 at 05:13 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `about` (
   `umur` int(11) NOT NULL,
   `email` varchar(1000) NOT NULL,
   `foto` varchar(255) NOT NULL,
-  `date` int(11) NOT NULL,
+  `tanggal` varchar(25) NOT NULL,
   `craete_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -45,8 +45,8 @@ CREATE TABLE `about` (
 -- Dumping data for table `about`
 --
 
-INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `website`, `kota`, `umur`, `email`, `foto`, `date`, `craete_at`) VALUES
-(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', 'testimonials-4.jpg', 0, 0);
+INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `website`, `kota`, `umur`, `email`, `foto`, `tanggal`, `craete_at`) VALUES
+(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', 'testimonials-4.jpg', '12-06-200', 0);
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,9 @@ CREATE TABLE `capabilitas` (
 
 INSERT INTO `capabilitas` (`id`, `judul`, `paragraf`, `info`, `foto`, `created_at`) VALUES
 (2, 'Framework Boostrap', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'pngegg.png', '2024-10-30 08:05:09'),
-(3, 'Framework Tailwind', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'Tailwind CSS.png', '2024-10-30 07:59:41');
+(3, 'Framework Tailwind', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'Tailwind CSS.png', '2024-10-30 07:59:41'),
+(10, 'CSS', 'aliquid fuga consequatus meaning sint consectetur velite', 'lorem ipsum dolor site amet', 'css_logo.png', '2024-10-30 14:33:52'),
+(11, 'PHP', 'aliquid fuga consequatus meaning sint consectetur velite', 'lorem ipsum dolor site amet', 'PHP.png', '2024-10-30 14:36:59');
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,9 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `nama`, `email`, `subjek`, `pesan`, `created_at`) VALUES
-(1, 'tio nugraba', 'ucup@gmail.com', 'aassdsdesd', 'dfdfdffg', '2024-10-30 07:13:35');
+(1, 'tio nugraba', 'ucup@gmail.com', 'aassdsdesd', 'dfdfdffg', '2024-10-30 07:13:35'),
+(5, 'yunus jambul ijo', 'firo@wulo.com', 'holaaa guestt', 'lorem123', '2024-10-30 14:46:17'),
+(8, 'indra baja ringan', 'baja_ringan@gmail.com', 'holaaa guestt', '1222', '2024-10-30 14:47:49');
 
 -- --------------------------------------------------------
 
@@ -103,7 +107,7 @@ CREATE TABLE `footer` (
   `id` int(11) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `twitter` varchar(255) NOT NULL,
-  `youtube` varchar(50) NOT NULL,
+  `telepon` varchar(50) NOT NULL,
   `ig` varchar(50) NOT NULL,
   `fb` varchar(50) NOT NULL,
   `linkedin` varchar(255) NOT NULL
@@ -113,8 +117,8 @@ CREATE TABLE `footer` (
 -- Dumping data for table `footer`
 --
 
-INSERT INTO `footer` (`id`, `deskripsi`, `twitter`, `youtube`, `ig`, `fb`, `linkedin`) VALUES
-(0, 'ini lorem ipsum dolor ', 'http://localhost/angkatan1/', 'http://localhost/angkatan3/myprofile/admin/', 'http://localhost/angkatan2/', 'http://localhost/angkatan3', 'http://localhost/angkatan3/myperpusw');
+INSERT INTO `footer` (`id`, `deskripsi`, `twitter`, `telepon`, `ig`, `fb`, `linkedin`) VALUES
+(0, 'ini lorem ipsum dolor ', 'http://localhost/angkatan1/', '223244334', 'http://localhost/angkatan2/', 'http://localhost/angkatan3', 'http://localhost/angkatan3/myperpusw');
 
 -- --------------------------------------------------------
 
@@ -225,7 +229,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `foto`, `update_at`, `create_at`) VALUES
-(1, 'rio tunsteng', 'bandung', 'hero-bg.jpg', '2024-10-30 01:19:52', '2024-10-26 14:35:11');
+(1, 'Wahyuditama Caesaramdany', 'I am a web programming from Jakarta', 'images.jpg', '2024-10-30 13:54:39', '2024-10-26 14:35:11');
 
 --
 -- Indexes for dumped tables
@@ -293,13 +297,13 @@ ALTER TABLE `about`
 -- AUTO_INCREMENT for table `capabilitas`
 --
 ALTER TABLE `capabilitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `home`
