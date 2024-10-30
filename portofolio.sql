@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 04:54 PM
+-- Generation Time: Oct 30, 2024 at 10:46 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,29 +46,7 @@ CREATE TABLE `about` (
 --
 
 INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `website`, `kota`, `umur`, `email`, `foto`, `date`, `craete_at`) VALUES
-(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', '1730217041_profile-img.jpg', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `update_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`, `username`, `email`, `password`, `update_at`, `created_at`) VALUES
-(1, 'admin123', 'admin@gmail.com', '1234', '2024-10-28 03:41:46', '2024-10-28 03:41:46');
+(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', 'testimonials-4.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90,8 +68,30 @@ CREATE TABLE `capabilitas` (
 --
 
 INSERT INTO `capabilitas` (`id`, `judul`, `paragraf`, `info`, `foto`, `created_at`) VALUES
-(2, 'rindu yang terkubur', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'ilya-pavlov-OqtafYT5kTw-unsplash.jpg', '2024-10-29 07:41:00'),
-(3, 'azab api gas LPG', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', '', '2024-10-28 08:05:06');
+(2, 'Framework Boostrap', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'pngegg.png', '2024-10-30 08:05:09'),
+(3, 'Framework Tailwind', 'lorem ipsum dolor site amet. amer123', 'baru dimulai', 'Tailwind CSS.png', '2024-10-30 07:59:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `subjek` text NOT NULL,
+  `pesan` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `nama`, `email`, `subjek`, `pesan`, `created_at`) VALUES
+(1, 'tio nugraba', 'ucup@gmail.com', 'aassdsdesd', 'dfdfdffg', '2024-10-30 07:13:35');
 
 -- --------------------------------------------------------
 
@@ -101,12 +101,20 @@ INSERT INTO `capabilitas` (`id`, `judul`, `paragraf`, `info`, `foto`, `created_a
 
 CREATE TABLE `footer` (
   `id` int(11) NOT NULL,
+  `deskripsi` varchar(100) NOT NULL,
   `twitter` varchar(255) NOT NULL,
   `youtube` varchar(50) NOT NULL,
   `ig` varchar(50) NOT NULL,
   `fb` varchar(50) NOT NULL,
   `linkedin` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `footer`
+--
+
+INSERT INTO `footer` (`id`, `deskripsi`, `twitter`, `youtube`, `ig`, `fb`, `linkedin`) VALUES
+(0, 'ini lorem ipsum dolor ', 'http://localhost/angkatan1/', 'http://localhost/angkatan3/myprofile/admin/', 'http://localhost/angkatan2/', 'http://localhost/angkatan3', 'http://localhost/angkatan3/myperpusw');
 
 -- --------------------------------------------------------
 
@@ -127,7 +135,7 @@ CREATE TABLE `home` (
 --
 
 INSERT INTO `home` (`id`, `header`, `sub_judul`, `foto`, `created_at`) VALUES
-(1, 'lorem ipsum dolor site amet', 'lorem dolor', 'img-1.jpg', '2024-10-29 12:44:05');
+(1, 'Lorem Website', 'lorem dolor', 'testimonials-4.jpg', '2024-10-30 07:38:49');
 
 -- --------------------------------------------------------
 
@@ -156,6 +164,28 @@ INSERT INTO `konten` (`id`, `judul_konten`, `isi_konten`, `foto`, `keterangan`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pemilik`
+--
+
+CREATE TABLE `pemilik` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pemilik`
+--
+
+INSERT INTO `pemilik` (`id`, `username`, `email`, `password`, `update_at`, `created_at`) VALUES
+(1, 'admin123', 'admin@gmail.com', '1234', '2024-10-28 03:41:46', '2024-10-28 03:41:46');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `testimoni`
 --
 
@@ -167,6 +197,13 @@ CREATE TABLE `testimoni` (
   `foto` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `testimoni`
+--
+
+INSERT INTO `testimoni` (`id`, `nama`, `deskripsi`, `profesi`, `foto`, `created_at`) VALUES
+(2, 'rizki123', 'ini lorem ipsum dolor ', 'chiken', 'testimonials-5.jpg', '2024-10-30 02:02:14');
 
 -- --------------------------------------------------------
 
@@ -188,7 +225,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `foto`, `update_at`, `create_at`) VALUES
-(1, 'rio tunsteng', 'bandung', 'img-1.jpg', '2024-10-29 13:02:12', '2024-10-26 14:35:11');
+(1, 'rio tunsteng', 'bandung', 'hero-bg.jpg', '2024-10-30 01:19:52', '2024-10-26 14:35:11');
 
 --
 -- Indexes for dumped tables
@@ -201,15 +238,15 @@ ALTER TABLE `about`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `capabilitas`
 --
 ALTER TABLE `capabilitas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -222,6 +259,12 @@ ALTER TABLE `home`
 -- Indexes for table `konten`
 --
 ALTER TABLE `konten`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pemilik`
+--
+ALTER TABLE `pemilik`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -244,19 +287,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `capabilitas`
 --
 ALTER TABLE `capabilitas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `home`
@@ -271,10 +314,16 @@ ALTER TABLE `konten`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `pemilik`
+--
+ALTER TABLE `pemilik`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `testimoni`
 --
 ALTER TABLE `testimoni`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
