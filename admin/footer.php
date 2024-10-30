@@ -84,12 +84,12 @@ if (isset($_GET['delete'])) {
                                             <th>No</th>
                                             <th>deskripsi</th>
                                             <th>Link Twitter</th>
-                                            <th>Link Youtube</th>
+                                            <th>Nomor Telepon</th>
                                             <th>Link Facebook</th>
                                             <th>Link instagram</th>
                                             <th>Link Linkedin</th>
                                             <th>Aksi</th>
-                                           
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,15 +97,15 @@ if (isset($_GET['delete'])) {
                                         while ($rowfooter = mysqli_fetch_assoc($queryFooter)) { ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
-                                               
+
                                                 <td><?php echo $rowfooter['deskripsi'] ?></td>
                                                 <td><?php echo $rowfooter['twitter'] ?></td>
-                                                
-                                                <td><?php echo $rowfooter['youtube'] ?></td>
+
+                                                <td><?php echo $rowfooter['telepon'] ?></td>
                                                 <td><?php echo $rowfooter['ig'] ?></td>
                                                 <td><?php echo $rowfooter['fb'] ?></td>
                                                 <td><?php echo $rowfooter['linkedin'] ?></td>
-                                                
+
                                                 <td>
                                                     <a href="tambah-footer.php?edit=<?php echo $rowfooter['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>

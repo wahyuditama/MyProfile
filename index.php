@@ -1,6 +1,7 @@
 <?php
 session_abort();
 include 'admin/database/db.php';
+
 //Konten Projek
 $queryAhli = mysqli_query($conn, "SELECT * FROM capabilitas ");
 
@@ -10,9 +11,13 @@ $rowHome = mysqli_fetch_assoc($queryHome);
 // Konten Profile
 $queryProfile = mysqli_query($conn, "SELECT * FROM  user ");
 $rowProfile = mysqli_fetch_assoc($queryProfile);
-//Konten Kontak
+//Konten Kontak/About
 $sqlA = mysqli_query($conn, "SELECT * FROM about");
 $rowA = mysqli_fetch_assoc($sqlA);
+// Konten Footer 
+
+$queryFooter = mysqli_query($conn, "SELECT * FROM footer");
+$rowFooter = mysqli_fetch_assoc($queryFooter);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,8 +87,8 @@ $rowA = mysqli_fetch_assoc($sqlA);
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#skill">Skill</a></li>
+          <li><a href="#testimonials">Projek</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="admin/login.php">Setting</a></li>
@@ -105,7 +110,7 @@ $rowA = mysqli_fetch_assoc($sqlA);
 
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
         <h2><?php echo $rowProfile['nama'] ?></h2>
-        <p>I am a graphic designer living in New York<br></p>
+        <p><?php echo $rowProfile['alamat'] ?><br></p>
         <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
       </div>
 
@@ -135,15 +140,15 @@ $rowA = mysqli_fetch_assoc($sqlA);
             <div class="row">
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span><?php echo $rowA['tanggal'] ?></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><?php echo $rowA['website'] ?></span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+62<?php echo $rowFooter['telepon'] ?></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>New York, USA</span></li>
                 </ul>
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span><?php echo $rowA['tanggal'] ?></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>email@example.com</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
@@ -171,8 +176,8 @@ $rowA = mysqli_fetch_assoc($sqlA);
     <section id="services" class="services section">
 
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Projek</h2>
+      <div class="container section-title" id="skill" data-aos="fade-up">
+        <h2>Skill</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -184,7 +189,7 @@ $rowA = mysqli_fetch_assoc($sqlA);
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
               <div class="service-item position-relative">
                 <div class="icon"><img src="admin/upload/<?php echo $rowAhli['foto'] ?>" style="width: 100px; height:auto;"></div>
-                <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                <h4><a href="" class="stretched-link"><?php echo $rowAhli['judul'] ?></a></h4>
                 <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
               </div>
             </div>
@@ -228,8 +233,8 @@ $rowA = mysqli_fetch_assoc($sqlA);
     <section id="testimonials" class="testimonials section">
 
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
+      <div class="container section-title " data-aos="fade-up">
+        <h2>Projek</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -270,7 +275,7 @@ $rowA = mysqli_fetch_assoc($sqlA);
                   <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
                   <i class="bi bi-quote quote-icon-right"></i>
                 </p>
-                <img src="landing_page/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <img src="landing_page/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img w-50" alt="">
                 <h3>Saul Goodman</h3>
                 <h4>Ceo &amp; Founder</h4>
               </div>
@@ -418,7 +423,7 @@ $rowA = mysqli_fetch_assoc($sqlA);
 
   <footer id="footer" class="footer light-background">
     <div class="container">
-      <h3 class="sitename">Lonely</h3>
+      <h3 class="sitename"><?php echo $rowProfile['nama'] ?></h3>
       <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -429,14 +434,14 @@ $rowA = mysqli_fetch_assoc($sqlA);
       </div>
       <div class="container">
         <div class="copyright">
-          <span>Copyright</span> <strong class="px-1 sitename">Lonely</strong> <span>All Rights Reserved</span>
+          <span>Copyright</span> <strong class="px-1 sitename">DCR</strong> <span>All Rights Reserved</span>
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you've purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
         </div>
       </div>
     </div>

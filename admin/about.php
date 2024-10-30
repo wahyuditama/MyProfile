@@ -109,7 +109,7 @@ if (isset($_GET['delete'])) {
                                                 <td><?php echo $rowAbout['kota'] ?></td>
                                                 <td><?php echo $rowAbout['umur'] ?></td>
                                                 <td><?php echo $rowAbout['email'] ?></td>
-                                                <td><?php echo $rowAbout['date'] ?></td>
+                                                <td><?php echo $rowAbout['tanggal'] ?></td>
                                                 <td>
                                                     <a href="tambah-about.php?edit=<?php echo $rowAbout['id'] ?>" class="btn btn-success btn-sm">
                                                         <span class="tf-icon bx bx-pencil bx-18px ">Edit</span>

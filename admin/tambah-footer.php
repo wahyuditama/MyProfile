@@ -7,13 +7,13 @@ include 'database/db.php';
 if (isset($_POST['simpan'])) {
     $deskripsi = $_POST['deskripsi'];
     $twitter = $_POST['twitter'];
-    $youtube = $_POST['youtube'];
+    $telepon = $_POST['telepon'];
     $ig = $_POST['ig'];
     $fb = $_POST['fb'];
     $linkedin = $_POST['linkedin'];
 
-    $insert = mysqli_query($conn, "INSERT INTO footer (deskripsi, twitter, youtube, ig, fb, linkedin) 
-    VALUES ('$deskripsi', '$twitter', '$youtube', '$ig', '$fb', '$linkedin')");
+    $insert = mysqli_query($conn, "INSERT INTO footer (deskripsi, twitter, telepon, ig, fb, linkedin) 
+    VALUES ('$deskripsi', '$twitter', '$telepon', '$ig', '$fb', '$linkedin')");
 
     header("location:footer.php?ubah=berhasil");
 }
@@ -29,23 +29,22 @@ $rowEditFooter = mysqli_fetch_assoc($queryEditFooter);
 if (isset($_POST['edit'])) {
     $deskripsi = $_POST['deskripsi'];
     $twitter = $_POST['twitter'];
-    $youtube = $_POST['youtube'];
+    $telepon = $_POST['telepon'];
     $ig = $_POST['ig'];
     $fb = $_POST['fb'];
     $linkedin = $_POST['linkedin'];
-   
+
     // jika user ingin memasukkan gambar
-  
+
     // Perbarui data
     $update = mysqli_query($conn, "UPDATE footer SET 
     deskripsi = '$deskripsi', 
     twitter = '$twitter', 
-    youtube = '$youtube', 
+    telepon = '$telepon', 
     ig = '$ig', 
     linkedin = '$linkedin' ");
     header("location:footer.php?ubah=berhasil");
-
-    }
+}
 
 
 
@@ -90,7 +89,7 @@ if (isset($_POST['edit'])) {
             <div id="content">
 
                 <!-- Topbar -->
-               <?php include 'layout/navbar.php' ?>
+                <?php include 'layout/navbar.php' ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -99,8 +98,8 @@ if (isset($_POST['edit'])) {
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard Tambah Footer</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
                     <!-- Content Row -->
@@ -125,11 +124,11 @@ if (isset($_POST['edit'])) {
                                                         value="<?php echo isset($_GET['edit']) ? $rowEditFooter['twitter'] : '' ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="deskripsi_profesi">Sosial Media youtube</label>
-                                                    <input type="text" class="form-control" id="" name="youtube"
-                                                        value="<?php echo isset($_GET['edit']) ? $rowEditFooter['youtube'] : '' ?>">
+                                                    <label for="deskripsi_profesi">Tulis Nomor telepon</label>
+                                                    <input type="number" class="form-control" id="" name="telepon"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditFooter['telepon'] : '' ?>">
                                                 </div>
-                                                
+
                                             </div>
 
                                             <!-- Right Column (col-6) -->
@@ -149,7 +148,7 @@ if (isset($_POST['edit'])) {
                                                     <input type="text" class="form-control" id="" name="linkedin"
                                                         value="<?php echo isset($_GET['edit']) ? $rowEditFooter['linkedin'] : '' ?>">
                                                 </div>
-                                              
+
                                             </div>
                                         </div>
 

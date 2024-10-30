@@ -12,32 +12,31 @@ if (isset($_POST['simpan'])) {
     $kota = $_POST['kota'];
     $umur = (int) $_POST['umur'];
     $email = $_POST['email'];
-    $date = $_POST['date'];
+    $tanggal = $_POST['tanggal'];
 
     // jika user ingin memasukkan gambar
     if (!empty($_FILES['foto']['name'])) {
-    $nama_foto = $_FILES['foto']['name'];
-    $ukuran_foto = $_FILES['foto']['size'];
+        $nama_foto = $_FILES['foto']['name'];
+        $ukuran_foto = $_FILES['foto']['size'];
 
-    // png, jpg, jpeg
-    $ext = array('png', 'jpg', 'jpeg');
-    $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
-    // Cek jika file adalah gambar dan upload foto
-   
-    if (!in_array($extFoto, $ext)) {
-        echo "Ext tidak ditemukan";
-        die;
-    } else{
-        move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
+        // png, jpg, jpeg
+        $ext = array('png', 'jpg', 'jpeg');
+        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
+        // Cek jika file adalah gambar dan upload foto
 
-        $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, date, foto) 
-        VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$date', '$nama_foto')");
+        if (!in_array($extFoto, $ext)) {
+            echo "Ext tidak ditemukan";
+            die;
+        } else {
+            move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
+            $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, tanggal, foto) 
+        VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$tanggal', '$nama_foto')");
+        }
+    } else {
+        $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, tanggal) 
+    VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$tanggal')");
     }
-}else{
-    $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, date) 
-    VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$date')");
-}
     header("location:about.php?ubah=berhasil");
 }
 
@@ -56,8 +55,8 @@ if (isset($_POST['edit'])) {
     $kota = $_POST['kota'];
     $umur = (int) $_POST['umur'];
     $email = $_POST['email'];
-    $date = $_POST['date'];
-   
+    $tanggal = $_POST['tanggal'];
+
     // jika user ingin memasukkan gambar
     if (!empty($_FILES['foto']['name'])) {
         $nama_foto = $_FILES['foto']['name'];
@@ -74,7 +73,7 @@ if (isset($_POST['edit'])) {
             unlink('upload/' . $rowEditAbout['foto']); // Hapus foto lama
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
-            $update = mysqli_query($conn, "UPDATE about SET 
+            $uptanggal = mysqli_query($conn, "UPtanggal about SET 
             deskripsi = '$deskripsi', 
             profesi = '$profesi', 
             deskripsi_profesi = '$deskripsi_profesi', 
@@ -82,13 +81,13 @@ if (isset($_POST['edit'])) {
             kota = '$kota', 
             umur = $umur, 
             email = '$email', 
-            date = '$date', 
+            tanggal = '$tanggal', 
             foto = '$nama_foto' 
             WHERE id = $id");
         }
-    }else{
-    // Perbarui data
-    $update = mysqli_query($conn, "UPDATE about SET 
+    } else {
+        // Perbarui data
+        $uptanggal = mysqli_query($conn, "UPtanggal about SET 
     deskripsi = '$deskripsi', 
     profesi = '$profesi', 
     deskripsi_profesi = '$deskripsi_profesi', 
@@ -96,7 +95,7 @@ if (isset($_POST['edit'])) {
     kota = '$kota', 
     umur = $umur, 
     email = '$email', 
-    date = '$date', 
+    tanggal = '$tanggal', 
     WHERE id = $id");
     }
 
@@ -144,7 +143,7 @@ if (isset($_POST['edit'])) {
             <div id="content">
 
                 <!-- Topbar -->
-               <?php include 'layout/navbar.php' ?>
+                <?php include 'layout/navbar.php' ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -153,8 +152,8 @@ if (isset($_POST['edit'])) {
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard About</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
                     <!-- Content Row -->
@@ -213,9 +212,9 @@ if (isset($_POST['edit'])) {
                                                         value="<?php echo isset($_GET['edit']) ? $rowEditAbout['email'] : '' ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="date">Tanggal</label>
-                                                    <input type="date" class="form-control" id="date" name="date"
-                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['date'] : '' ?>">
+                                                    <label for="tanggal">Tanggal</label>
+                                                    <input type="text" class="form-control" id="tanggal" name="tanggal"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['tanggal'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
