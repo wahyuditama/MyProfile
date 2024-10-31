@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2024 at 05:13 PM
+-- Generation Time: Oct 31, 2024 at 06:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ability`
+--
+
+CREATE TABLE `ability` (
+  `id` int(11) NOT NULL,
+  `atk` varchar(100) NOT NULL,
+  `base_hp` varchar(100) NOT NULL,
+  `base_atk` varchar(100) NOT NULL,
+  `base_deff` varchar(100) NOT NULL,
+  `crit_rate` varchar(100) NOT NULL,
+  `crit_dmg` varchar(100) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ability`
+--
+
+INSERT INTO `ability` (`id`, `atk`, `base_hp`, `base_atk`, `base_deff`, `crit_rate`, `crit_dmg`, `create_at`) VALUES
+(1, '20', '13', '30', '30', '10', '5445', '2024-10-31 14:11:02');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `about`
 --
 
@@ -32,7 +56,9 @@ CREATE TABLE `about` (
   `deskripsi` varchar(255) NOT NULL,
   `profesi` varchar(255) NOT NULL,
   `deskripsi_profesi` varchar(100) NOT NULL,
-  `website` varchar(100) NOT NULL,
+  `about_header` varchar(100) NOT NULL,
+  `header_paragraf` varchar(100) NOT NULL,
+  `detail_paragraf` varchar(100) NOT NULL,
   `kota` text NOT NULL,
   `umur` int(11) NOT NULL,
   `email` varchar(1000) NOT NULL,
@@ -45,8 +71,8 @@ CREATE TABLE `about` (
 -- Dumping data for table `about`
 --
 
-INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `website`, `kota`, `umur`, `email`, `foto`, `tanggal`, `craete_at`) VALUES
-(1, 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.', 'writter', 'Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize pr', 'http://localhost/profile/admin/tambah-about.php', 'jogja', 34, 'firo@wulo.com', 'testimonials-4.jpg', '12-06-200', 0);
+INSERT INTO `about` (`id`, `deskripsi`, `profesi`, `deskripsi_profesi`, `about_header`, `header_paragraf`, `detail_paragraf`, `kota`, `umur`, `email`, `foto`, `tanggal`, `craete_at`) VALUES
+(1, 'Head Shrine Maiden of the Grand Narukumi Shrine Owner of the Yae Publishing House', 'About Yae Miko', 'Lady Guuji of the Grand Narukami Shrine also serves as the editor-in-chief of Yae Publishing ', 'Secret Art: Tenko Kenshin,', 'Miko has long, muted pink hair that is tied at the bottom. She also has pink fox ears that po', 'Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omni', 'jogja', 34, 'firo@wulo.com', '1349794.png', '12-06-200', 0);
 
 -- --------------------------------------------------------
 
@@ -162,8 +188,10 @@ CREATE TABLE `konten` (
 --
 
 INSERT INTO `konten` (`id`, `judul_konten`, `isi_konten`, `foto`, `keterangan`, `update_at`, `create_at`) VALUES
-(2, 'Elysia', 'hacenser of human', 'images.jpg', 'lorem ipsum dolor', '2024-10-29 07:41:18', '2024-10-28 01:17:13'),
-(3, 'ggg', 'A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options', 'order.png', 'kkkk', '2024-10-29 07:41:33', '2024-10-29 04:45:33');
+(4, '', '', '1351117.jpeg', '', '2024-10-31 14:41:31', '2024-10-31 14:41:31'),
+(6, '', '', '1351756.jpeg', '', '2024-10-31 15:09:46', '2024-10-31 15:09:46'),
+(7, '', '', '1353711.jpeg', '', '2024-10-31 15:09:59', '2024-10-31 15:09:59'),
+(8, '', '', '1353824.jpeg', '', '2024-10-31 15:10:10', '2024-10-31 15:10:10');
 
 -- --------------------------------------------------------
 
@@ -207,7 +235,7 @@ CREATE TABLE `testimoni` (
 --
 
 INSERT INTO `testimoni` (`id`, `nama`, `deskripsi`, `profesi`, `foto`, `created_at`) VALUES
-(2, 'rizki123', 'ini lorem ipsum dolor ', 'chiken', 'testimonials-5.jpg', '2024-10-30 02:02:14');
+(2, 'rizki123', 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.', 'chiken', 'testimonials-5.jpg', '2024-10-31 17:10:59');
 
 -- --------------------------------------------------------
 
@@ -229,11 +257,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `foto`, `update_at`, `create_at`) VALUES
-(1, 'Wahyuditama Caesaramdany', 'I am a web programming from Jakarta', 'images.jpg', '2024-10-30 13:54:39', '2024-10-26 14:35:11');
+(1, 'Yae Miko', 'Violet cherry blossoms on Mount Yougo', 'peakpx-yae.jpg', '2024-10-31 11:07:29', '2024-10-26 14:35:11');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `ability`
+--
+ALTER TABLE `ability`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `about`
@@ -288,6 +322,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `ability`
+--
+ALTER TABLE `ability`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
@@ -315,7 +355,7 @@ ALTER TABLE `home`
 -- AUTO_INCREMENT for table `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pemilik`
