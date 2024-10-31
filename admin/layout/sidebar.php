@@ -39,6 +39,8 @@
                 <a class="collapse-item" href="profile.php">Profile</a>
                 <a class="collapse-item" href="home.php">Home</a>
                 <a class="collapse-item" href="content.php">Konten</a>
+                <a class="collapse-item" href="ability.php">Ability</a>
+                <a class="collapse-item" href="tambah-ability.php">Tambah Ability</a>
 
             </div>
         </div>

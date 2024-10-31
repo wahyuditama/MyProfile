@@ -8,7 +8,9 @@ if (isset($_POST['simpan'])) {
     $deskripsi = $_POST['deskripsi'];
     $profesi = $_POST['profesi'];
     $deskripsi_profesi = $_POST['deskripsi_profesi'];
-    $website = $_POST['website'];
+    $about_header = $_POST['about_header'];
+    $header_paragraf = $_POST['header_paragraf'];
+    $detail_paragraf = $_POST['detail_paragraf'];
     $kota = $_POST['kota'];
     $umur = (int) $_POST['umur'];
     $email = $_POST['email'];
@@ -30,12 +32,12 @@ if (isset($_POST['simpan'])) {
         } else {
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
-            $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, tanggal, foto) 
-        VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$tanggal', '$nama_foto')");
+            $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, about_header,header_paragraf,detail_paragraf, kota, umur, email, tanggal, foto) 
+        VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$about_header','$header_paragraf','$detail_paragraf', '$kota', $umur, '$email', '$tanggal', '$nama_foto')");
         }
     } else {
-        $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, website, kota, umur, email, tanggal) 
-    VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$website', '$kota', $umur, '$email', '$tanggal')");
+        $sql = mysqli_query($conn, "INSERT INTO about (deskripsi, profesi, deskripsi_profesi, about_header,header_paragraf,detail_paragraf, kota, umur, email, tanggal) 
+    VALUES ('$deskripsi', '$profesi', '$deskripsi_profesi', '$about_header','$header_paragraf','$detail_paragraf', '$kota', $umur, '$email', '$tanggal')");
     }
     header("location:about.php?ubah=berhasil");
 }
@@ -51,7 +53,9 @@ if (isset($_POST['edit'])) {
     $deskripsi = $_POST['deskripsi'];
     $profesi = $_POST['profesi'];
     $deskripsi_profesi = $_POST['deskripsi_profesi'];
-    $website = $_POST['website'];
+    $about_header = $_POST['about_header'];
+    $header_paragraf = $_POST['header_paragraf'];
+    $detail_paragraf = $_POST['detail_paragraf'];
     $kota = $_POST['kota'];
     $umur = (int) $_POST['umur'];
     $email = $_POST['email'];
@@ -73,30 +77,33 @@ if (isset($_POST['edit'])) {
             unlink('upload/' . $rowEditAbout['foto']); // Hapus foto lama
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);
 
-            $uptanggal = mysqli_query($conn, "UPtanggal about SET 
+            $update = mysqli_query($conn, "UPDATE about SET 
             deskripsi = '$deskripsi', 
             profesi = '$profesi', 
             deskripsi_profesi = '$deskripsi_profesi', 
-            website = '$website', 
+            about_header = '$about_header', 
+            header_paragraf = '$header_paragraf', 
+            detail_paragraf = '$detail_paragraf', 
             kota = '$kota', 
-            umur = $umur, 
+            umur = '$umur', 
             email = '$email', 
             tanggal = '$tanggal', 
             foto = '$nama_foto' 
-            WHERE id = $id");
+            WHERE id = '$id'");
         }
     } else {
         // Perbarui data
-        $uptanggal = mysqli_query($conn, "UPtanggal about SET 
+        $update = mysqli_query($conn, "UPDATE about SET 
     deskripsi = '$deskripsi', 
     profesi = '$profesi', 
     deskripsi_profesi = '$deskripsi_profesi', 
-    website = '$website', 
+    header_paragraf = '$header_paragraf',
+    detail_paragraf = '$detail_paragraf',
     kota = '$kota', 
-    umur = $umur, 
+    umur = '$umur', 
     email = '$email', 
-    tanggal = '$tanggal', 
-    WHERE id = $id");
+    tanggal = '$tanggal'
+    WHERE id = '$id'");
     }
 
 
@@ -179,13 +186,18 @@ if (isset($_POST['edit'])) {
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsi_profesi">Deskripsi Profesi</label>
-                                                    <input type="text" class="form-control" id="deskripsi_profesi" name="deskripsi_profesi"
+                                                    <input type="text" class="form-control" id="" name="deskripsi_profesi"
                                                         value="<?php echo isset($_GET['edit']) ? $rowEditAbout['deskripsi_profesi'] : '' ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="website">Website</label>
-                                                    <input type="url" class="form-control" id="website" name="website"
-                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['website'] : '' ?>">
+                                                    <label for="about_header">Judul Header</label>
+                                                    <input type="text" class="form-control" id="about_header" name="about_header"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['about_header'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="header_paragraf">Judul Header</label>
+                                                    <input type="text" class="form-control" id="header_paragraf" name="header_paragraf"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['header_paragraf'] : '' ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="file">foto</label>
@@ -215,6 +227,11 @@ if (isset($_POST['edit'])) {
                                                     <label for="tanggal">Tanggal</label>
                                                     <input type="text" class="form-control" id="tanggal" name="tanggal"
                                                         value="<?php echo isset($_GET['edit']) ? $rowEditAbout['tanggal'] : '' ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="detail_paragraf">Paragraf Akhir</label>
+                                                    <input type="text" class="form-control" id="detail_paragraf" name="detail_paragraf"
+                                                        value="<?php echo isset($_GET['edit']) ? $rowEditAbout['detail_paragraf'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -257,7 +274,7 @@ if (isset($_POST['edit'])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your about_header 2021</span>
                     </div>
                 </div>
             </footer>

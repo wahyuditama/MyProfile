@@ -86,7 +86,9 @@ if (isset($_GET['delete'])) {
                                             <th>deskripsi</th>
                                             <th>Profesi</th>
                                             <th>deskripsi Profesi</th>
-                                            <th>website</th>
+                                            <th>Judul Header</th>
+                                            <th>Paragraf Awal</th>
+                                            <th>Paragraf Akhir</th>
                                             <th>Kota</th>
                                             <th>Umur</th>
                                             <th>Email</th>
@@ -105,7 +107,9 @@ if (isset($_GET['delete'])) {
                                                 <td><?php echo $rowAbout['deskripsi'] ?></td>
                                                 <td><?php echo $rowAbout['profesi'] ?></td>
                                                 <td><?php echo $rowAbout['deskripsi_profesi'] ?></td>
-                                                <td><?php echo $rowAbout['website'] ?></td>
+                                                <td><?php echo $rowAbout['about_header'] ?></td>
+                                                <td><?php echo $rowAbout['header_paragraf'] ?></td>
+                                                <td><?php echo $rowAbout['detail_paragraf'] ?></td>
                                                 <td><?php echo $rowAbout['kota'] ?></td>
                                                 <td><?php echo $rowAbout['umur'] ?></td>
                                                 <td><?php echo $rowAbout['email'] ?></td>
