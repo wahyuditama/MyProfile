@@ -153,9 +153,7 @@ if (isset($_POST['edit'])) {
                                         </div>
                                         <div class="form-group">
                                             <label for=""> Masukan keterangan Konten Disini</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="" aria-describedby="" name="keterangan"
-                                                placeholder="" value="<?php echo isset($_GET['edit']) ? $rowEdit['keterangan'] : '' ?>">
+                                            <textarea class="form-control form-control-user" name="keterangan" rows="5" placeholder="Masukkan keterangan"><?php echo isset($_GET['edit']) ? htmlspecialchars($rowEdit['keterangan']) : ''; ?></textarea>
                                         </div>
 
                                         <button href="" type="submit" name="<?php echo isset($_GET['edit']) ? 'edit' : 'simpan' ?>" class="btn btn-primary btn-user btn-block">

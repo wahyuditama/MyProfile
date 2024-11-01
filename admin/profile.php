@@ -76,7 +76,10 @@ if (isset($_GET['delete'])) {
                                 </div>
                             <?php endif ?>
                             <div align="right" class="mb-3">
-                                <a href="tambah-profile.php" class="btn btn-primary">Tambah</a>
+                                <a href="">
+                                    <script>
+                                        window.print();
+                                    </script>Tambah</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" width="100%">

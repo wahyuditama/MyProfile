@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 06:19 PM
+-- Generation Time: Nov 01, 2024 at 08:51 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -188,10 +188,10 @@ CREATE TABLE `konten` (
 --
 
 INSERT INTO `konten` (`id`, `judul_konten`, `isi_konten`, `foto`, `keterangan`, `update_at`, `create_at`) VALUES
-(4, '', '', '1351117.jpeg', '', '2024-10-31 14:41:31', '2024-10-31 14:41:31'),
-(6, '', '', '1351756.jpeg', '', '2024-10-31 15:09:46', '2024-10-31 15:09:46'),
-(7, '', '', '1353711.jpeg', '', '2024-10-31 15:09:59', '2024-10-31 15:09:59'),
-(8, '', '', '1353824.jpeg', '', '2024-10-31 15:10:10', '2024-10-31 15:10:10');
+(10, 'Memory Of Dust', 'ATK 49.6% (Lvl. 90)', '23158_w.png', '- Greatly increases ATK for more damage.\r\n- Requires shields to maximize effects but is still good e', '2024-11-01 07:13:29', '2024-11-01 07:03:56'),
+(11, 'Skyward Atlas', 'ATK 33.1% (Lvl. 90)', '24178_w.png', '- Greatly increases ATK of Yae Miko increasing all of the DMG of the character.\r\n- Elemental DMG Bon', '2024-11-01 07:14:40', '2024-11-01 07:04:01'),
+(12, 'Kaguras Verity ', 'CRIT DMG 66.2% (Lvl. 90)', '30998_w.png', '- Yae Miko Signature Weapon\r\n- Increases the DMG of the Elemental Skill the more you use it\r\n- CRIT ', '2024-11-01 07:12:42', '2024-11-01 07:04:11'),
+(13, 'The Widsith', 'CRIT DMG 55.1% (Lvl. 90)', '24179_w.png', '- High Crit DMG sub-stat makes building CR/CD easy\r\n- All of Widsiths Weapon Skill effects benefit Y', '2024-11-01 07:16:42', '2024-11-01 07:04:18');
 
 -- --------------------------------------------------------
 
@@ -235,7 +235,12 @@ CREATE TABLE `testimoni` (
 --
 
 INSERT INTO `testimoni` (`id`, `nama`, `deskripsi`, `profesi`, `foto`, `created_at`) VALUES
-(2, 'rizki123', 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.', 'chiken', 'testimonials-5.jpg', '2024-10-31 17:10:59');
+(2, 'Spiritfox Sin-Eater', 'Normal Attack Summons forth kitsune spirits, initiating a maximum of 3 attacks that deal Electro DMG.  Charged Attack Consumes a certain amount of Stamina to deal Electro DMG after a short casting time.', 'Normal Attack', 'Catalyst_Electro.jpg', '2024-11-01 01:04:00'),
+(3, 'Yakan Evocation: Sesshou Sakura', 'Periodically strikes one nearby opponent with lightning, dealing Electro DMG When there are other Sesshou Sakura nearby, their level will increase, boosting the DMG dealt by these lightning strikes.', 'Elemental Skill', 'Yakan Evocation.jpg', '2024-11-01 01:03:28'),
+(4, 'Great Secret Art: Tenko Kenshin', 'When she uses this skill, Yae Miko will unseal nearby Sesshou Sakura, destroying their outer forms and transforming them into Tenko Thunderbolts that descend from the skies, dealing AoE Electro DMG. ', 'Elemental Burst', 'Talent_Great_Secret_Art_Tenko_Kenshin.png', '2024-11-01 03:22:07'),
+(5, 'The Shrines Sacred Shade', 'When casting Great Secret Art: Tenko Kenshin, each Sesshou Sakura destroyed resets the cooldown for 1 charge of Yakan Evocation: Sesshou Sakura.', '1st Ascension Passive', 'Yakan Evocation.jpg', '2024-11-01 03:36:27'),
+(7, 'Enlightened Blessing', ' Passive Every point of Elemental Mastery Yae Miko possesses will increase Sesshou Sakura DMG by 0.15%.', '4th Ascension Passive', 'tenko_shine.jpg', '2024-11-01 04:27:45'),
+(8, 'Meditations of a Yako', 'Has a 25% chance to get 1 regional Character Talent Material (base material excluded) when crafting. The rarity is that of the base material.', 'Utility Passive', 'Talent_Meditations_of_a_Yako.jpg', '2024-11-01 04:32:07');
 
 -- --------------------------------------------------------
 
@@ -355,7 +360,7 @@ ALTER TABLE `home`
 -- AUTO_INCREMENT for table `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `pemilik`
@@ -367,7 +372,7 @@ ALTER TABLE `pemilik`
 -- AUTO_INCREMENT for table `testimoni`
 --
 ALTER TABLE `testimoni`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
