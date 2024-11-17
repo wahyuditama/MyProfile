@@ -1,9 +1,7 @@
 <?php
-session_abort();
+session_start();
 include 'admin/database/db.php';
 
-//Konten Projek
-$queryAhli = mysqli_query($conn, "SELECT * FROM capabilitas ");
 
 //konten home
 $queryHome = mysqli_query($conn, "SELECT * FROM  home");
@@ -11,18 +9,9 @@ $rowHome = mysqli_fetch_assoc($queryHome);
 // Konten Profile
 $queryProfile = mysqli_query($conn, "SELECT * FROM  user ");
 $rowProfile = mysqli_fetch_assoc($queryProfile);
-//Konten Kontak/About
-$sqlA = mysqli_query($conn, "SELECT * FROM about");
-$rowA = mysqli_fetch_assoc($sqlA);
-// Konten
-$queryKonten = mysqli_query($conn, "SELECT * FROM  konten LIMIT 4");
 
-//testing 
-$queryTesting = mysqli_query($conn, "SELECT * FROM testimoni ");
 
-//ability / Skill
-$querySkill = mysqli_query($conn, "SELECT * FROM  ability");
-$rowSkill = mysqli_fetch_assoc($querySkill);
+
 // Konten Footer 
 
 $queryFooter = mysqli_query($conn, "SELECT * FROM footer");
@@ -103,17 +92,14 @@ $rowFooter = mysqli_fetch_assoc($queryFooter);
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="landing_page/assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Lonely</h1>
+        <h1 class="sitename">Pendaftaran Miko</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#Weapon">Weapon</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="admin/login.php"><span>Setting</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          </li>
+          <li><a href="form-pendaftaran.php">Daftar</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -125,236 +111,16 @@ $rowFooter = mysqli_fetch_assoc($queryFooter);
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background" style=" background: url(admin/upload/<?php echo $rowProfile['foto'] ?>) no-repeat">
-
+    <section id="hero" class="hero section dark-background" style=" background: url() no-repeat">
+      <img src="admin/upload/<?php echo $rowHome['foto'] ?>" alt="">
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <h2 style="color:red"><?php echo $rowProfile['nama'] ?></h2>
-        <p style="color:red"><?php echo $rowProfile['alamat'] ?><br></p>
+        <p class="btn btn-outline-primary" style="color:red;"><a href="form-pendaftaran.php"></a>Daftar Sekarang</>
+        <p style="color:red"><?php echo $rowHome['sub_judul'] ?><br></p>
         <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
       </div>
 
-    </section><!-- /Hero Section -->
-
-    <!-- About Section -->
-    <section id="about" class="about section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2><?php echo $rowA['profesi'] ?></h2>
-        <p><?PHP echo $rowA['deskripsi'] ?></p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="admin/upload/<?php echo $rowA['foto'] ?>" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 content">
-            <h2><?php echo $rowA['about_header'] ?> &amp; From Narukami island</h2>
-            <p class="fst-italic py-3">
-              <?php echo $rowA['header_paragraf'] ?>
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>New York, USA</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>email@example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-                </ul>
-              </div>
-            </div>
-            <p class="py-3">
-              <?php echo $rowA['detail_paragraf'] ?>
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /About Section -->
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>ATK</span> <i class="val"><?php echo $rowSkill['atk'] ?></i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $rowSkill['atk'] ?>" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>Base HP</span> <i class="val"><?php echo $rowSkill['base_hp'] ?></i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $rowSkill['base_hp'] ?>" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>JavaScript</span> <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>PHP</span> <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>WordPress/CMS</span> <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>Photoshop</span> <i class="val">55%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Skills Section -->
-
-    <!-- Resume Section -->
-
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Weapon</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-          <?php while ($rowKonten = mysqli_fetch_assoc($queryKonten)) { ?>
-            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-item position-relative">
-                <div class="icon"><img src="admin/upload/<?php echo $rowKonten['foto'] ?>" alt=""></div>
-                <h4><a href="" class="stretched-link"><?php echo $rowKonten['judul_konten'] ?></a></h4>
-                <p><?php echo $rowKonten['keterangan'] ?></p>
-              </div>
-            </div>
-          <?php } ?>
-          <!-- End Service Item -->
-
-
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Telent</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper" data-speed="600" data-delay="5000" data-breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: 1, &quot;spaceBetween&quot;: 40 }, &quot;1200&quot;: { &quot;slidesPerView&quot;: 3, &quot;spaceBetween&quot;: 40 } }">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <?php
-            $queryTesting = mysqli_query($conn, "SELECT * FROM testimoni");
-
-            while ($rowTesting = mysqli_fetch_assoc($queryTesting)) {
-            ?>
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span><?php echo ($rowTesting['deskripsi']); ?></span> <!-- Ganti dengan kolom yang sesuai -->
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                  <img src="admin/upload/<?php echo ($rowTesting['foto']); ?>" class="testimonial-img" alt="">
-                  <h3><?php echo ($rowTesting['nama']); ?></h3>
-                  <h4><?php echo ($rowTesting['profesi']); ?></h4>
-                </div>
-              </div>
-            <?php
-            }
-            ?>
-
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
+    </section>
+    <!-- /Hero Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">

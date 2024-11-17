@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "profile"
+    "liveServer.settings.multiRootWorkspaceName": "profile",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

@@ -1,8 +1,12 @@
 <?php
+// session_start();
 include 'database/db.php';
 
 $sqlHome = mysqli_query($conn, "SELECT * FROM home ");
 $rowHome = mysqli_fetch_assoc($sqlHome);
+
+// Data Dari pengguna
+$sqlPengguna = mysqli_query($conn, "SELECT * FROM pengguna ");
 
 ?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -65,7 +69,7 @@ $rowHome = mysqli_fetch_assoc($sqlHome);
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php ($_SESSION['id_level']) ?></span>
                 <img class="img-profile rounded-circle"
                     src="upload/<?php echo $rowHome['foto'] ?>">
             </a>

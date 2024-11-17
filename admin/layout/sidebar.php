@@ -1,3 +1,14 @@
+<?php
+
+include 'database/db.php';
+
+if (isset($_SESSION['ID'])) {
+    $userID = $_SESSION['ID'];
+    $querySide = mysqli_query($conn, "SELECT * FROM user");
+    // $rowSide = mysqli_fetch_array($querySide);
+}
+?>
+<!--  -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -28,40 +39,53 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Section-1</span>
+            <span>Administrator</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="profile.php">Profile</a>
-                <a class="collapse-item" href="home.php">Home</a>
-                <a class="collapse-item" href="content.php">Konten</a>
-                <a class="collapse-item" href="ability.php">Ability</a>
-                <a class="collapse-item" href="tambah-ability.php">Tambah Ability</a>
+        <!-- Administrator -->
+        <?php if ($_SESSION['id_level'] == 3) : ?>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <!-- <a class="collapse-item" href="profile.php">Profile</a> -->
+                    <a class="collapse-item" href="home.php">Home</a>
+                    <a class="collapse-item" href="data-peserta-pelatihan.php">Data Peserta</a>
+                    <a class="collapse-item" href="gelombang.php">Gelombang</a>
+                    <a class="collapse-item" href="jurusan.php">Jurusan</a>
+                    <a class="collapse-item" href="admin.php"> Admin</a>
+                    <a class="collapse-item" href="user.php"> Data Pengguna</a>
+                    <a class="collapse-item" href="tambah-admin.php">Tambah Admin</a>
+                    <!-- <a class="collapse-item" href="edit-data-peserta.php"></a> -->
+                    <!-- <a class="collapse-item" href="tambah-admin.php">Tambah Admin</a> -->
+                    <a class="collapse-item" href="tambah-level.php">Tambah Level</a>
+                    <a class="collapse-item" href="data-peserta-pelatihan.php">Data Peserta</a>
+                    <a class="collapse-item" href="tambah-gelombang.php">Tambah Gelombang</a>
+                    <a class="collapse-item" href="tambah-kejuruan.php">Tambah jurusan</a>
 
+                </div>
             </div>
-        </div>
+        <?php endif ?>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Section-2</span>
+            <span>PIC Jurusan</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="keahlian.php">Data Keterampilan</a>
-                <a class="collapse-item" href="testimoni.php">Testimoni</a>
-                <a class="collapse-item" href="contact.php">Contact</a>
-                <a class="collapse-item" href="about.php">About</a>
-                <a class="collapse-item" href="footer.php">footer</a>
+        <!-- PIC Jurusan  -->
+        <?php if ($_SESSION['id_level'] == 2) : ?>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="data-peserta-pelatihan.php">Data Peserta</a>
+                    <a class="collapse-item" href="about.php">About</a>
+                    <a class="collapse-item" href="footer.php">footer</a>
+                </div>
             </div>
-        </div>
+        <?php endif ?>
     </li>
 
 
@@ -74,31 +98,35 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Section-3 </span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item p-2" href="tambah-keahlian.php">Tambah Data Keterampilan</a>
-                <a class="collapse-item" href="tambah-profile.php">Tambah Profile</a>
-                <a class="collapse-item" href="tambah-home.php">Tambah-Home</a>
-                <a class="collapse-item" href="tambah-about.php">Tambah-About</a>
-                <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
+    <?php if ($_SESSION['id_level'] == 1) : ?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Admin Aplikasi </span>
+            </a>
+            <!-- Admin Aplikasi -->
 
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Utilities:</h6>
+                    <a class="collapse-item" href="data-peserta-pelatihan.php">Data Peserta</a>
+                    <a class="collapse-item" href="about.php">About</a>
+                    <a class="collapse-item" href="footer.php">footer</a>
+                    <a class="collapse-item" href="tambah-profile.php">Tambah Profile</a>
+                    <a class="collapse-item" href="tambah-about.php">Tambah-About</a>
+                    <a class="collapse-item" href="tambah-content.php">Tambah Konten</a>
+
+                </div>
             </div>
-        </div>
-    </li>
 
+        </li>
+    <?php endif ?>
     <!-- Nav Item - Charts -->
 
 
     <!--  -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed1" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages2">
             <i class="fas fa-fw fa-folder"></i>
@@ -111,7 +139,7 @@
                 <a class="collapse-item" href="tambah-footer.php">Tambah Footer</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
 
     <!-- Nav Item - Tables -->

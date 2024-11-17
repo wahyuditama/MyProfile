@@ -47,7 +47,7 @@ session_start();
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="w-100" style="background-image: url('../landing_page/assets/img/banner-img.png');">
 
                 <!-- Topbar -->
 
@@ -67,7 +67,7 @@ session_start();
                     <div class="row pt-5 mt-5">
 
                         <!-- Section-1 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -82,10 +82,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-1  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -100,10 +100,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-1  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -123,10 +123,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-1 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -141,7 +141,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Content Row 2 -->
@@ -149,7 +149,7 @@ session_start();
                     <div class="row">
 
                         <!-- Section-2 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -164,10 +164,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-2  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -182,10 +182,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-2  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -205,10 +205,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-2 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -223,14 +223,14 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                     <!-- Content Row 3-->
                     <div class="row ">
 
                         <!-- Section-3 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -245,10 +245,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-3  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -263,10 +263,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-3  (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -286,10 +286,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-3 Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -304,7 +304,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Content Row 4 -->
@@ -312,7 +312,7 @@ session_start();
                     <div class="row">
 
                         <!-- Section-4Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -327,10 +327,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-4 (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -345,10 +345,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-4 (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -368,10 +368,10 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Section-4Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 example">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4 example">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -386,7 +386,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -414,7 +414,7 @@ session_start();
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your Website 2024</span>
                     </div>
                 </div>
             </footer>
